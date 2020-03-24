@@ -3,3 +3,15 @@
 ![QCPU-Ware Logo](QCPU.png)
 
 ### This page is home to tutorials, documentation, and downloads for QCPU-Ware
+
+Download QCPU-Ware:
+[Download](https://github.com/cogrpar/qcpuWARE)
+
+Video Tutorials:
+[Video Tutorials](https://www.youtube.com/channel/UCNy6WfWTRKS4vya6KlD4Hxg)
+
+Docs:
+[QCPU-Ware Documentation](docs.pdf)
+
+Having issues?
+[QCPUWare - Issues](https://github.com/cogrpar/qcpuWARE/issues)

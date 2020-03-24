@@ -23,5 +23,4 @@ General Info:
 [General Info Video](https://www.youtube.com/channel/UCNy6WfWTRKS4vya6KlD4Hxg) <!-- link this to info video -->
 
 ### Latest Release:
-<video src="QCPU-Ware Trailer.mp4" width="320" height="200" controls preload></video>
-![Release Trailer](QCPU-Ware Trailer.mp4)
+[Release Trailer](QCPU-Ware Trailer.mp4)

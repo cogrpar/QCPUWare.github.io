@@ -11,7 +11,7 @@ Video Tutorials:
 [Video Tutorials](https://www.youtube.com/channel/UCNy6WfWTRKS4vya6KlD4Hxg)
 
 Docs:
-[QCPU-Ware Documentation](docs.pdf)
+[QCPU-Ware Documentation](docs.md)
 
 Having issues?
 [QCPUWare - Issues](https://github.com/cogrpar/qcpuWARE/issues)

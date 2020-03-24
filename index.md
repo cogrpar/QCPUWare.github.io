@@ -1,6 +1,6 @@
-## The Simplest Approach to Coding on a Quantum Computer
+## Welcome to the Official Site of QCPU-Ware! The Simplest Approach to Coding on a Quantum Computer
 
-
-# Welcome to the official site of QCPU-Ware!
+![QCPU-Ware Logo](QCPU.png)
+Format: ![Alt Text](url)
 
 This page is home to tutorials, documentation, and downloads for QCPU-Ware

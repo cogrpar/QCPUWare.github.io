@@ -2,4 +2,4 @@
 
 ![QCPU-Ware Logo](QCPU.png)
 
-This page is home to tutorials, documentation, and downloads for QCPU-Ware
+### This page is home to tutorials, documentation, and downloads for QCPU-Ware

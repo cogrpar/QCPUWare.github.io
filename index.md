@@ -24,3 +24,11 @@ General Info:
 
 ### Latest Release:
 [Release Trailer](QCPU-Ware Trailer.mp4)
+<details>
+<summary>Music Credits For Video</summary>
+<br>
+Dreams by Firefl!es https://soundcloud.com/mangesh-dongare-427116573
+Creative Commons — Attribution 3.0 Unported — CC BY 3.0
+Free Download / Stream: http://bit.ly/dreams-fireflies
+Music promoted by Audio Library https: https://youtu.be/UD0-KV3SoGI
+</details>

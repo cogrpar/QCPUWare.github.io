@@ -5,7 +5,7 @@
 ### This page is home to tutorials, documentation, and downloads for QCPU-Ware
 
 Download QCPU-Ware:
-[Download](https://github.com/cogrpar/qcpuWARE)
+[Download](https://github.com/cogrpar/qcpuWARE/archive/master.zip)
 
 Video Tutorials:
 [Video Tutorials](https://www.youtube.com/channel/UCNy6WfWTRKS4vya6KlD4Hxg)

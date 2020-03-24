@@ -7,6 +7,9 @@
 Download QCPU-Ware:
 [Download](https://github.com/cogrpar/qcpuWARE/archive/master.zip)
 
+View the QCPUWare Repo:
+[Repo](https://github.com/cogrpar/qcpuWARE/)
+
 Video Tutorials:
 [Video Tutorials](https://www.youtube.com/channel/UCNy6WfWTRKS4vya6KlD4Hxg)
 

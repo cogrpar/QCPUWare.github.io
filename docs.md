@@ -8,10 +8,10 @@ QCPU-Ware is software that allows users to solve problems on a quantum computer 
 QCPU-Ware stands for "Quantum Converter Processing Unit softWare".  A Quantum Converter Processing Unit is a device that converts a problem specified by the user, into a problem that a quantum computer can solve.  The advantage of using a QCPU is that it allows the user to formulate problems without needing to know exactly how quantum computers work.  This also eliminates the need for the user to know how to formulate problems for the quantum computer.  This, in turn, makes coding on a quantum computer much easier, and available to people with any level of coding experience.   QCPU-Ware allows any Debian Linux based system (E.g. a Raspberry Pi) to be used as a QCPU.
 
 
-## 2. Installation and Setup
+## 2. How QCPU-Ware Works
 
 
-## 3. How QCPU-Ware Works
+## 3. Installation and Setup
 
 
 ## 4. What Types of Problems Can You Solve With QCPU-Ware?

@@ -1,0 +1,1 @@
+images for the docs are stored in this folder

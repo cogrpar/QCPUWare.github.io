@@ -9,6 +9,8 @@ QCPU-Ware stands for "Quantum Converter Processing Unit softWare".  A Quantum Co
 
 
 ## 2. How QCPU-Ware Works
+### 2.1 QCPU
+QCPU-Ware allows the user to set up a QCPU on any device running Debian based Linux (some popular debian based Linux distros are Ubuntu, Raspbian, Zorin os, and Kali Linux.  To get a complete list, see https://en.wikipedia.org/wiki/Category:Debian-based_distributions).  A QCPU can be set up 
 
 
 ## 3. Installation and Setup

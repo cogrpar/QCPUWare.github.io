@@ -18,8 +18,11 @@ Recall that QCPU-Ware only supports setting up QCPUs on devices running Debian b
 ### 2.3 External QCPU
 An external QCPU can be set up any any device running Debian based Linux, so long as it is connected to the same wifi network as the primary device.  There are many [single board computers](https://en.wikipedia.org/wiki/Single-board_computer) out there that are capable of running linux.  These computers are a great option for an external QCPU, because they are often very cheap.  The best option when it comes to single board external QCPUs is the [Raspberry Pi](https://www.raspberrypi.org/).
 
-### 2.4 How QCPU-Ware Sets Up QCPUs to Randle Requests from the Java Library
-
+### 2.4 How QCPU-Ware Sets Up QCPUs to Handle Requests from the Java Library
+When the QCPU-Ware QCPU setup script is run on a Linux device, it does 3 things:
+**1.** It sets up an [Apache Webserver](https://httpd.apache.org) on the device, to which the Java library can send requests and access results.
+**2.** It installs the QCPU software that alows the device to convert user formulated problems into problems that can be submitted to a quantum computer.  It also generates a script that makes the QCPU software run on boot of the device.
+**3.** It installs and sets up the D-Wave Ocean SDK on the device, allowing it to submit problems to a quantum computer and get the result back. 
 
 ## 3. Installation and Setup
 

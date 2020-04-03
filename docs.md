@@ -52,6 +52,29 @@ pip3 --version
 If you get an output telling you the version for all three of these command, you are ready to move on.
 
 #### 3.1.2 Cloning QCPU-Ware
+There are two options for cloning the QCPU-Ware Github repository:
+
+**1.** You can download the repo as a .zip file by clicking the "Download" button on the [QCPU-Ware Official Website](https://cogrpar.github.io/cogrpar.QCPUWare.github.io/):
+![Download Button](imgs/DownloadScreenshot.png)
+Once the .zip file has finished downloading, extract the contents of the file to a directory that you can easily access.  You can do this through the File Viewer GUI, or by using this command:
+```
+unzip qcpuWARE-master.zip
+```
+Once the contents of the .zip file have been extracted, navigate into the new folder called "qcpuWARE-master" by using this command:
+```
+cd qcpuWARE-master
+```
+
+**2.** You can clone the repo directly using **git**.  To do that, navigate to the directory where you would like the repository to be cloned to, and run this command:
+```
+sudo git clone https://github.com/cogrpar/qcpuWARE.git
+```
+Once git has finished cloning the repo, navigate into the new direcory called "qcpuWARE" by using this command:
+```
+cd qcpuWARE
+```
+
+#### 3.1.2 Running the QCPU-Ware QCPU Setup Script
 
 
 ## 4. What Types of Problems Can You Solve With QCPU-Ware?

@@ -55,7 +55,7 @@ If you get an output telling you the version for all three of these command, you
 There are two options for cloning the QCPU-Ware Github repository:
 
 **1.** You can download the repo as a .zip file by clicking the "Download" button on the [QCPU-Ware Official Website](https://cogrpar.github.io/cogrpar.QCPUWare.github.io/):
-![Download Button](imgs/DownloadScreenshot.png)
+![Download Button](https://cogrpar.github.io/cogrpar.QCPUWare.github.io/imgs/DownloadScreenshot.png)
 Once the .zip file has finished downloading, extract the contents of the file to a directory that you can easily access.  You can do this through the File Viewer GUI, or by using this command:
 ```
 unzip qcpuWARE-master.zip

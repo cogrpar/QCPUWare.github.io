@@ -75,6 +75,7 @@ cd qcpuWARE
 ```
 
 #### 3.1.2 Running the QCPU-Ware QCPU Setup Script
+<iframe src="https://cogrpar.github.io/cogrpar.QCPUWare.github.io/imgs/Warning1.html" height="1600" width="1000" scrolling='yes' frameBorder="0" align="left" ></iframe>
 
 
 ## 4. What Types of Problems Can You Solve With QCPU-Ware?

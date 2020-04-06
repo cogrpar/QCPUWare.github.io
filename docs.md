@@ -79,8 +79,13 @@ cd qcpuWARE
 
 Once you have navigated into the repository directory (qcpuWARE-master if you downloaded the .zip file, and qcpuWARE if you used git), navigate into the "QCPU_Setup" directory by using this command:
 ```
-cd qcpuWARE
+cd QCPU_Setup
 ```
+You can now execute the QCPU setup script using this command:
+```
+sudo python3 setup.py install
+```
+If you have already set up a QCPU on a device, and would like to update it, run the above command, but replace the "install" argument with an "update" argument.  If you are prompted for the root password, and you have a root password set up, then enter the root password and hit enter.  If you are prompted for the root password, and you do not have a root password, type in the password of the account that you are currently using and hit enter.  The setup script will start by installing an [Apache Webserver](https://httpd.apache.org) on your device (see [How QCPU-Ware Sets Up QCPUs to Handle Requests from the Java Library](https://cogrpar.github.io/cogrpar.QCPUWare.github.io/docs.html#24-how-qcpu-ware-sets-up-qcpus-to-handle-requests-from-the-java-library)).  If the script prompts you to give it permission to install the webserver, you must give it permission by typing "y" and then enter.
 
 
 ## 4. What Types of Problems Can You Solve With QCPU-Ware?

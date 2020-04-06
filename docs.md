@@ -89,7 +89,19 @@ If you have already set up a QCPU on a device, and would like to update it, run 
 ```
 What would you like the server's password to be (optional): 
 ```
-This is an optional setting, so you can either type in a password, or you can leave it blank and hit enter.  If you do set a password, you will need to use it in the QCPU-Ware Java library in order to access the QCPU.
+This is an optional setting, so you can either type in a password, or you can leave it blank and hit enter.  If you do set a password, you will need to use it in the QCPU-Ware Java library in order to access the QCPU.  Next, the setup script will prompt you for a username:
+```
+username:
+```
+This username should be the user that you are currently using, and the one that the "/home/(username)" directory is named after.  Type in your username and hit enter.  Next, you will be asked if you are using an ARM based device (which is often the case if you are using a single-board external QCPU, i.g. a Raspberry Pi):
+```
+Are you using a raspberry pi or other device with similar architecture (ARM based)? (y = yes, n = no):
+```
+The setup script needs this information in order to know how to install the [D-Wave Ocean SDK](https://github.com/dwavesystems/dwave-ocean-sdk) on your QCPU.  In order to install the SDK on an ARM based device, it must build the SDK directly on the device, whereas on other architectures, it can simply use [python3-pip](https://pip.pypa.io/en/stable/).  If you are using an ARM based device, type "y" into this field.  Otherwise, type "n".  Hit enter.  Next, the script will ask for your root password:
+```
+root password:
+```
+It needs the root password to tell the QCPU to start the QCPU-Ware solvers automatically when the device boots up.  As mentioned earlier, if you have no root password on your device, type in the password of the user that you are currently using.  For example, if you are using Ubuntu (which has no root password by default), and you are logged in as a user named "user" whose password is "password", you would type "password" when promped for the root password.  If you do have a root password, type it in and hit enter.
 
 
 ## 4. What Types of Problems Can You Solve With QCPU-Ware?

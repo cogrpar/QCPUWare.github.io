@@ -77,6 +77,11 @@ cd qcpuWARE
 #### 3.1.2 Running the QCPU-Ware QCPU Setup Script
 <iframe src="https://cogrpar.github.io/cogrpar.QCPUWare.github.io/imgs/Warning2.html" height="100" width="1000" scrolling='yes' frameBorder="0" align="left" ></iframe>
 
+Once you have navigated into the repository directory (qcpuWARE-master if you downloaded the .zip file, and qcpuWARE if you used git), navigate into the "QCPU_Setup" directory by using this command:
+```
+cd qcpuWARE
+```
+
 
 ## 4. What Types of Problems Can You Solve With QCPU-Ware?
 

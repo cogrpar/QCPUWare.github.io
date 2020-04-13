@@ -122,6 +122,46 @@ Authentication token [skip]:
 Each D-Wave Leap account has a unique authentication token generated for it.  By using your account authentucation token, the QCPU can access the quantum computers with your Leap account, without needing to store your account username or password.  To get your authentication token, you will want to go to your [D-Wave Leap Account Dashboard](https://cloud.dwavesys.com/leap/).  Log in with your Leap account, and scroll until you see a text box on the left side of the screen that says: "API Token"; click on the "copy" button to copy the token to your clipboard:
 ![APItoken](imgs/APItoken.png)
 Once you have copied the token to your clipboard, paste it into the setup script terminal window.  Once you have input your API token into the setup script, hit enter.  Next, you should see this:
+```
+Default client class (qpu or sw) [qpu]:
+```
+You will want to leave this setting as default, so hit enter.  Next, you should see this:
+```
+Default solver [skip]:
+```
+This is the setting that the QCPU will use to determine what device it will send the problems to.  You will need to type in the name of the quantum computer that your D-Wave Leap account has access to.  To get the name of this solver, go back to your [D-Wave Leap Account Dashboard](https://cloud.dwavesys.com/leap/).  Scroll all the way to the bottom, untill you see the text box that says "Supported Solvers"; look under "Solvers", and under "QPU".  This is the name of the quantum computer that you have access to:
+![SolverQPU](imgs/SolverQPU.png)
+Copy this solver name, and paste it into the setup script terminal window.  Once you have inserted the solver name, hit enter.  The setup script now has all of the information it needs to access a D-Wave quantum computer.  Your configuration should be saved, and you should see:
+```
+Configuration saved.
+```
+The last thing that the setup script will do, is ping the D-Wave quantum computer using the ```dwave ping``` command.  If the ping is successful, you should see an output similar to this:
+```
+Using endpoint: https://cloud.dwavesys.com/sapi
+Using solver: (your solver name)
+Submitted problem ID: 874c2706-0edb-4627-bc6f-b5c6d94dc0f7
+
+Wall clock time:
+ * Solver definition fetch: 659.668 ms
+ * Problem submit and results fetch: 1877.596 ms
+ * Total: 2537.264 ms
+
+QPU timing:
+ * qpu_sampling_time = 315 us
+ * qpu_anneal_time_per_sample = 20 us
+ * qpu_readout_time_per_sample = 274 us
+ * qpu_access_time = 9696 us
+ * qpu_access_overhead_time = 1896 us
+ * qpu_programming_time = 9382 us
+ * qpu_delay_time_per_sample = 21 us
+ * total_post_processing_time = 54 us
+ * post_processing_overhead_time = 54 us
+ * total_real_time = 9696 us
+ * run_time_chip = 315 us
+ * anneal_time_per_run = 20 us
+ * readout_time_per_run = 274 us
+```
+If you get this output, the setup script has completed successfully, and you are ready to start using your QCPU!
 
 
 ## 4. What Types of Problems Can You Solve With QCPU-Ware?

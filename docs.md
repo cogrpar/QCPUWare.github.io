@@ -160,6 +160,7 @@ QPU timing:
  * run_time_chip = 315 us
  * anneal_time_per_run = 20 us
  * readout_time_per_run = 274 us
+setup complete
 ```
 If you get this output, the setup script has completed successfully, and you are ready to start using your QCPU!
 

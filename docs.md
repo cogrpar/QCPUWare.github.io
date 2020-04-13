@@ -101,7 +101,12 @@ The setup script needs this information in order to know how to install the [D-W
 ```
 root password:
 ```
-It needs the root password to tell the QCPU to start the QCPU-Ware solvers automatically when the device boots up.  As mentioned earlier, if you have no root password on your device, type in the password of the user that you are currently using.  For example, if you are using Ubuntu (which has no root password by default), and you are logged in as a user named "user" whose password is "password", you would type "password" when promped for the root password.  If you do have a root password, type it in and hit enter.
+It needs the root password to tell the QCPU to start the QCPU-Ware solvers automatically when the device boots up.  As mentioned earlier, if you have no root password on your device, type in the password of the user that you are currently using.  For example, if you are using Ubuntu (which has no root password by default), and you are logged in as a user named "user" whose password is "password", you would type "password" when promped for the root password.  If you do have a root password, type it in and hit enter.  The setup script has now finished installing the QCPU-Ware QCPU solvers on your QCPU, and the only thing left that it needs to do is to set up your D-Wave Leap account on the QCPU so that it can use your account to access the quantum computers.  When the script does this, it will prompt you for all of your account information.  It stores this infomation using the ```dwave config create``` command built into the D-Wave Ocean SDK.  The instructions for how to fill out the fields for this command are below, but you can get more information at [the D-Wave Docs](https://docs.ocean.dwavesys.com/en/stable/overview/sapi.html).  You should see this text once the setup script has started asking for your D-Wave Leap account information:
+```
+Time to input your dwave leap account info; if you are not sure how to fill out these fields, please refer to https://docs.ocean.dwavesys.com/en/stable/overview/sapi.html
+Configuration file not found; the default location is: /home/(user)/.config/dwave/dwave.conf
+Confirm configuration file path [/home/(user)/.config/dwave/dwave.conf]:
+```
 
 
 ## 4. What Types of Problems Can You Solve With QCPU-Ware?

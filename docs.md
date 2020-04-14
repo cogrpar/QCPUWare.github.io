@@ -93,7 +93,7 @@ This is an optional setting, so you can either type in a password, or you can le
 ```
 username:
 ```
-This username should be the user that you are currently using, and the one that the "/home/(username)" directory is named after.  Type in your username and hit enter.  Next, you will be asked if you are using an ARM based device (which is often the case if you are using a single-board external QCPU, i.g. a Raspberry Pi):
+This username should be the user that you are currently using, and the one that the "/home/(username)" directory is named after.  Type in your username and hit enter.  Next, you will be asked if you are using an ARM based device (which is often the case if you are using a single-board external QCPU, i.e. a Raspberry Pi):
 ```
 Are you using a raspberry pi or other device with similar architecture (ARM based)? (y = yes, n = no):
 ```
@@ -163,6 +163,8 @@ QPU timing:
 setup complete
 ```
 If you get this output, the setup script has completed successfully, and you are ready to start using your QCPU!
+
+### 3.2 Installing the QCPU-Ware Java Library
 
 
 ## 4. What Types of Problems Can You Solve With QCPU-Ware?

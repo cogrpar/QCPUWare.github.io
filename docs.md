@@ -162,9 +162,46 @@ QPU timing:
  * readout_time_per_run = 274 us
 setup complete
 ```
-If you get this output, the setup script has completed successfully, and you are ready to start using your QCPU!
+If you get this output, the setup script has completed successfully, and you are ready to start using your QCPU!  Your QCPU should now be set up to start running the QCPU-Ware QCPU solvers whenever it boots up.  For more information on connecting to your QCPU using the Java library, see [Connecting to Your QCPU](https://cogrpar.github.io/cogrpar.QCPUWare.github.io/docs.html#5-connecting-to-your-qcpu).
 
 ### 3.2 Installing the QCPU-Ware Java Library
+
+In order to install the QCPU-Ware Java library on your primary device, you will need to clone the QCPU-Ware github repo on the primary device.  Once again, here are the two options for cloning the QCPU-Ware Github repository:
+
+**1.** You can download the repo as a .zip file by clicking the "Download" button on the [QCPU-Ware Official Website](https://cogrpar.github.io/cogrpar.QCPUWare.github.io/):
+![Download Button](https://cogrpar.github.io/cogrpar.QCPUWare.github.io/imgs/DownloadScreenshot.png)
+Once the .zip file has finished downloading, extract the contents of the file to a directory that you can easily access.  Once the contents of the .zip file have been extracted, navigate into the new folder called "qcpuWARE-master", either in a file viewer GUI, or by using this command:
+```
+cd qcpuWARE-master
+```
+
+**2.** You can clone the repo directly using **git** (of course if you decide to use this method, you must make sure that git is installed on your primary device.  You can acces the download page [here](https://git-scm.com/downloads)).  To do that, navigate to the directory where you would like the repository to be cloned to, and run this command:
+```
+git clone https://github.com/cogrpar/qcpuWARE.git
+```
+Once git has finished cloning the repo, navigate into the new direcory called "qcpuWARE", either in a file viewer GUI, or by using this command:
+```
+cd qcpuWARE
+```
+Once the repository is cloned on the primary device, navigate into the directory containing the Java library, either in a file viewer GUI, or by using this command:
+```
+cd JavaLibrary
+```
+Inside of this directory, you should see the Java library as both a .jar file, and as a .java file: 
+![JavaFiles](imgs/Java.png)
+Some Java IDEs, such as [Eclipse](https://www.eclipse.org/eclipseide/) have the option to add a Java library in the form of a .jar file.  If you are using an IDE that supports this,  you can use that option to add the QCPU-Ware Java library .jar file to your project.  See [this](https://www.java67.com/2017/04/how-to-add-jar-file-in-eclipse-project.html) tutorial for adding .jar files to Eclipse projects.  If you are using an IDE that does not support adding external .jar files, or if you are not using an IDE, you can either manually add the .jar file to the Java classpath (see [this](https://howtodoinjava.com/java/basics/java-classpath/) tutorial), or you can just copy the .java file into your project directory.  Once you have added the QCPU-Ware Java library to your project using one of the above methods, you can test to make sure that you can use it in your code by creating a new instance of the library in your main method.  For example, if your project class is called "myClass", then your code should look like this:
+``` java
+//import statement up here if needed (see https://www.geeksforgeeks.org/packages-in-java/ for more info about "import" in java)
+
+class myClass{
+  //main method
+  public static void Main (String[] args){
+    //create a new instance of the qcpuWare Java library and call it qcpu:
+    qcpuWare qcpu = new qcpuWare();
+  }
+}
+```
+If you can run this code without errors, then the QCPU-Ware Java library is set up on your primary device, and you are ready to start solving problems using QCPU-Ware.
 
 
 ## 4. What Types of Problems Can You Solve With QCPU-Ware?

@@ -214,7 +214,7 @@ Quantum annealers, like the ones built by D-Wave (the ones used by QCPU-Ware), a
 ### 4.2 Optimization Problems that Can be Submitted Through QCPU-Ware
 QCPU-Ware uses the quantum annealers built by D-Wave Systems to solve optimization problems.  These quantum annealers have up to 5000 q-bits, but the technology is still in its early stages.  Even so, QCPU-Ware can be used to easily define and solve fairly complex and useful optimization problems on the quantum computers.  As of right now, QCPU-Ware has built-in tools to solve two kinds of optimization problems.
 
-**1.**  Binary Constraint Satisfaction Problems (BCSP):
+**1.  Binary Constraint Satisfaction Problems (BCSP):**
 The first kind of optimization problem that can be solved with QCPU-Ware is binary constraint satisfaction problems or BCSPs.  As the name suggests, BCSPs are problems that involve binary variables, meaning that they can be in one of two states: 0 or 1.  These variables can be used to represent real-life situations that can be in one of two states.  For example, a variable could be used to store whether a person is a male or female, if a store is open or closed, or if it is day or night.  Binary constraint satisfaction problems are defined by specifying one or more constraints about the set of binary variables.  These constraints can involve any number of variables, and they place limits on what states that the variables can be in, and what states they can be in with relation to each other.  For example, there could be a constraint saying: "If it is night, then the store is closed".  To solve the BSCP, 
 
 

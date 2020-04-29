@@ -216,8 +216,18 @@ QCPU-Ware uses the quantum annealers built by D-Wave Systems to solve optimizati
 
 **1.  Binary Constraint Satisfaction Problems (BCSP):**
 
-The first kind of optimization problem that can be solved with QCPU-Ware is **binary constraint satisfaction problems** or **BCSPs**.  As the name suggests, BCSPs are problems that involve binary variables, meaning that they can be in one of two states: 0 or 1.  These variables can be used to represent real-life situations that can be in one of two states.  For example, a variable could be used to store whether a person is a male or female, if a store is open or closed, or if it is day or night.  Binary constraint satisfaction problems are defined by specifying one or more constraints about the set of binary variables.  These constraints can involve any number of variables, and they place limits on what states that the variables can be in, and what states they can be in with relation to each other.  For example, there could be a constraint saying: "If it is night, then the store is closed".  Once all of the constraints have been specified, the goal is to find the configuration of all of the binary variables that satisfy as many of the constraints as possible.  This is how the BCSP is solved.  In our example with the two variables (day/night and store open/closed), and with the single constraint ("If it is night, then the store is closed"), then the two possible solutions to the BCSP: "day and open", or "night and closed".  This boolean truth table represents the example BCSP:
-![imgs/table.png](truth table)
+The first kind of optimization problem that can be solved with QCPU-Ware is **binary constraint satisfaction problems** or **BCSPs**.  As the name suggests, BCSPs are problems that involve binary variables, meaning that they can be in one of two states: 0 or 1.  These variables can be used to represent real-life situations that can be in one of two states.  For example, a variable could be used to store whether a person is a male or female, if a store is open or closed, or if it is day or night.  Binary constraint satisfaction problems are defined by specifying one or more constraints about the set of binary variables.  These constraints can involve any number of variables, and they place limits on what states that the variables can be in, and what states they can be in with relation to each other.  For example, there could be a constraint saying: "If it is night, then the store is closed, and if it is day, then the store is open".  Once all of the constraints have been specified, the goal is to find the configuration of all of the binary variables that satisfy as many of the constraints as possible.  This is how the BCSP is solved.  In our example with the two variables (day/night and store open/closed), and with the single constraint ("If it is night, then the store is closed, and if it is day, then the store is open"), then the two possible solutions to the BCSP: "day and open", or "night and closed".  This boolean truth table represents the example BCSP:
+```
+Variables: time (day/night), shop (open/closed)
+Constraints: “If it is night, then the store is closed, and if it is day, then the store is open”
+```
+| Variable Configuration                | Number of Constraints Satisfied |
+|---------------------------------------|---------------------------------|
+| ```time = day and store = open```     | 1                               |
+| ```time = day and store = closed```   | 0                               |
+| ```time = night and store = open```   | 0                               |
+| ```time = night and store = closed``` | 1                               |
+
 BCSPs with many variables are extremely difficult to solve on a classical computer, but they can be solved using QCPU-Ware.  To learn more about BCSPs, see the [D-Wave docs](https://docs.ocean.dwavesys.com/en/stable/examples/scheduling.html)
 
 **2.  Function Extremes:** 

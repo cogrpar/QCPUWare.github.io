@@ -221,6 +221,7 @@ The first kind of optimization problem that can be solved with QCPU-Ware is **bi
 Variables: time (day/night), shop (open/closed)
 Constraints: “If it is night, then the store is closed, and if it is day, then the store is open”
 ```
+
 | Variable Configuration                | Number of Constraints Satisfied |
 |---------------------------------------|---------------------------------|
 | ```time = day and store = open```     | 1                               |
@@ -228,7 +229,7 @@ Constraints: “If it is night, then the store is closed, and if it is day, then
 | ```time = night and store = open```   | 0                               |
 | ```time = night and store = closed``` | 1                               |
 
-BCSPs with many variables are extremely difficult to solve on a classical computer, but they can be solved using QCPU-Ware.  To learn more about BCSPs, see the [D-Wave docs](https://docs.ocean.dwavesys.com/en/stable/examples/scheduling.html)
+BCSPs with many variables are extremely difficult to solve on a classical computer, but they can be solved using QCPU-Ware.  To learn more about BCSPs, see the [D-Wave docs](https://docs.ocean.dwavesys.com/en/stable/concepts/csp.html)
 
 **2.  Function Extremes:** 
 

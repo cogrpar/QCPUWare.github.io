@@ -233,7 +233,7 @@ BCSPs with many variables are extremely difficult to solve on a classical comput
 **2.  Function Extremes:** 
 
 The second kind of optimization problem that can be solved with QCPU-Ware is called **function extremes**.  Imagine that you have an n-dimensional function, f(x1, x2, ... xn).  This function can model anything and the variables can be any value within a given domain.  Solving for the function extremes of f(x1, x2, ... xn) means solving for the configuration of all of the variable that yields the maximum or minimum value of the function.  For example, if f models cost, and it is based on variables like the number of employees, the salary of each employee, and such, then finding the minimum function extreme of f would correspond to finding the lowest cost in our situation.  If f(x1, x2, ... xn) makes a curve in (n+1)-dimensional space, then solving the function extreme means finding the point on the curve with the highest or lowest altitude:
-![imgs/altitude](graph)
+![imgs/altitude.png](graph)
 There are many useful applications for finding the function extremes of various types of functions, and QCPU-Ware gives you the ability to solve for those function extremes.
 
 ## 5. Connecting to Your QCPU

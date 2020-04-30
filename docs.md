@@ -239,10 +239,10 @@ The second kind of optimization problem that can be solved with QCPU-Ware is cal
 There are many useful applications for finding the function extremes of various types of functions, and QCPU-Ware gives you the ability to solve for those function extremes.
 
 ## 5. Connecting to Your QCPU
-### 5.1 QCPU IP Address
+### 5.1 QCPU IP Address Using the SetQcpuIP Method
 The first thing that you will need to establish a connection between your QCPU and the QCPU-Ware Java library is your QCPU's IP address.  In most situations, this will be the private IP address, and in order for the connection to work, both the QCPU and the primary device must be on the same network.  If you would like the primary device and the QCPU to be on different networks, you must [set up port forwarding on your router](https://stackoverflow.com/questions/22730420/how-to-configure-apache-webserver-to-be-accessed-by-public-domain-or-static-ip), and use your QCPU's public IP.
 
-#### 5.1.1 How to Get QCPU IP Address
+#### 5.1.1 How to Get QCPU IP Address 
 To get your QCPU's private IP address, open up a terminal on it and type in the following command:
 ```
 hostname -I
@@ -263,6 +263,24 @@ This step only applies if you set a QCPU server password (see [above](https://co
 qcpuWare.SetQcpuPw(String pw);
 ```
 To use the method, simply insert the above line somewhere in your code, where the ```pw``` parameter is your QCPU's server password as a string, eg. ```password```.
+
+### 5.3 Example Code
+In this example code, a new instance of the QCPU-Ware Java library is created (called qcpu).  Also, the SetQcpuIP and SetQcpuPw methods are used to specify the QCPU IP address and server password (for example's sake, the IP is ```"192.168.1.1"```, and the password is ```password```):
+``` java
+//import statement up here if needed (see https://www.geeksforgeeks.org/packages-in-java/ for more info about "import" in java)
+
+class myClass{
+  //main method
+  public static void Main (String[] args){
+    //create a new instance of the qcpuWare Java library and call it qcpu:
+    qcpuWare qcpu = new qcpuWare();
+    //specify the QCPU IP address using the SetQcpuIP method
+    qcpu.SetQcpuIP("192.168.1.1");
+    //specify the QCPU server password using the SetQcpuPw method
+    qcpu.SetQcpuPw("password");
+  }
+}
+```
 
 
 ## 6. Solving Binary Constraint Satisfaction Problems

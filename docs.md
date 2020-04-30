@@ -311,7 +311,7 @@ Now assign the constraints from your problem to the members of the string array.
 and -> and
 or -> or
 not -> not
-numbers can be used as well
+numbers and operations (+, -. *, /) can be used as well
 ```
 Constraints can be made up of the binary variables and the above symbols.  Once you know your constraints, you can assign them to the members of the constraints array (as strings).  For example, something like:
 ```java
@@ -327,7 +327,7 @@ problemStr += qcpuWare.ConstSet(constraints, numOfVars);
 ```
 The problem string is now complete, and the problem has been defined.  It is time to send the problem string to your QCPU so that it can be solved on a quantum computer.  Submitting the problem and getting the result back as an array is all done using a single method: ```SendToQCPU```.  This method returns the solution to the problem as an array of doubles.  If your problem string is called ```problemStr```, and the solution array is called ```solution```, then to submitting the problem and getting the result could be done using this line:
 ```java
-solution = qcpuWare.SendToQCPU(problemStr);
+double[] solution = qcpuWare.SendToQCPU(problemStr);
 ```
 Once the solution array has been returned, it can be used in your code.  For example, here is a simple bit of code that loops over the array, displaying the solution to the user:
 ```java
@@ -338,6 +338,95 @@ for (int i = 0; i < solution.length; i++){
 ```
 
 ### 6.1 Solving BCSP Using QCPU-Ware Example: Doctor's Office
+This is an example of a BCSP and how it can be solved using QCPU-Ware.  Imagine a doctor's office with two patient waiting rooms: a sick patient room, and a healthy patient room.  Here are the rules: if a patient is sick, then they must wait in the sick room, but healthy patients can wait in either room.  No more than 15 people can wait in the sick waiting room at any given time, and there will be no check-ups with healthy patients if there are over 10 sick patients.  We can create a set of constraints that fully capture these rules, eg:
+**Constraint #1: sick patients must wait in the sick patients room and healthy patients can wait in either room
+Constraint #2: no more than 15 patients in the sick patients room
+Constraint #3: no check-ups with healthy patients if there are over 10 sick patients**
+Once we have these constraints, we can formally define our binary variables, based on the information in the constraints:
+```
+health: 0 if you are healthy and 1 if you are sick
+room: 0 for healthy room, and 1 for sick room
+maxSickCapacity: 0 if < 15 people in the sick room (not including you), and 1 if there are 15 sick patients (not including you)
+maxSickPatients: 0 if < 10 sick patients (not including you), and 1 if there are 10 sick patients (not including you)
+```
+Now that we have formally defined the binary variables, we can rewrite each constraint using the variables and allowed syntax (see above):
+```java
+Constraint #1: "health * room == health"
+Constraint #2: "maxSickCapacity * health == 0"
+Constraint #3: "maxSickPatients * health == 0"
+```
+Now that we have defined our variables and constraints, we need to reformat the variables before we can plug the problem into QCPU-Ware.  Remember variables must be renamed v0, v1 ... vn for however many variables you have.  We can rename the variables like this:
+```java
+health: "v0"
+room: "v1"
+maxSickCapacity: "v2"
+maxSickPatients: "v3
+```
+Using the new variable names, the constraints become:
+```java
+Constraint #1: "v0 * v1 == v0"
+Constraint #2: "v2 * v0 == 0"
+Constraint #3: "v3 * v0 == 0"
+```
+We can now solve this example BCSP by using QCPU-Ware Java library as follows:
+First create a new instance of the library called qcpu, create the problem string, plug in the QCPU connection parameters (IP and password), and set the solver mode to BCSP:
+```java
+qcpuWare qcpu = new qcpuWare(); //create instance of library
+qcpu.SetQcpuIP("192.168.1.1"); //connection info
+qcpu.SetQcpuPw("password");
+
+String problemStr = ""; //create problem string
+problemStr += qcpu.ModeSet("BCSP"); //set mode to BCSP
+```
+Now we can create an int to store the number of variables, and we can declare and fill out the constraints array:
+```java
+int numOfVars = 4; //4 variables
+String[] constraints = new String[3]; //declare array to store our 3 constraints
+constraints[0] = "v0 * v1 == v0"; //fill out the constraints
+constraints[1] = "v2 * v0 == 0";
+constraints[2] = "v3 * v0 == 0"; 
+```
+Now we can add the constraints to the problem string:
+```java
+problemStr += qcpu.ConstSet(constraints, numOfVars);
+```
+Finally, we can submit the problem to be solved, and print the results to the user:
+```java
+double[] solution = qcpuWare.SendToQCPU(problemStr); //submit problem to QCPU to be solved and get result back as an array
+//print results all nice and pretty
+for (int i = 0; i < solution.length; i++){
+  System.out.println("v" + i + " ≈ " + solution[i]);
+}
+```
+That is it!  Here is the complete code:
+```java
+class DoctorsOffice{
+  public static void main (String[] args){
+    qcpuWare qcpu = new qcpuWare(); //create instance of library
+    qcpu.SetQcpuIP("192.168.1.1"); //connection info
+    qcpu.SetQcpuPw("password");
+
+    String problemStr = ""; //create problem string
+    problemStr += qcpu.ModeSet("BCSP"); //set mode to BCSP
+    
+    int numOfVars = 4; //4 variables
+    String[] constraints = new String[3]; //declare array to store our 3 constraints
+    constraints[0] = "v0 * v1 == v0"; //fill out the constraints
+    constraints[1] = "v2 * v0 == 0";
+    constraints[2] = "v3 * v0 == 0"; 
+    
+    problemStr += qcpu.ConstSet(constraints, numOfVars);
+    
+    double[] solution = qcpuWare.SendToQCPU(problemStr); //submit problem to QCPU to be solved and get result back as an array
+    //print results all nice and pretty
+    for (int i = 0; i < solution.length; i++){
+      System.out.println("v" + i + " ≈ " + solution[i]);
+    }
+  }
+}
+When this program is run, it should output a valid solution that satisfies all of the constraints (there are more than one solution, so you could get one of several results).  The chart below presents all solutions, valid or not, as well as the number of constraints that they satisfy:
+
+This example problem is simple, and we can simply look on the chart for the solutions, rather than going to all of the trouble of running the above code, but this is only an example.  There are many more useful and complex BCSPs out there, and QCPU-Ware can be used to solve them on a quantum computer.
 
 
 ## 7. Solving For Function Extremes 

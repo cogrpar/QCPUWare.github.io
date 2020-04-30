@@ -284,6 +284,21 @@ class myClass{
 
 
 ## 6. Solving Binary Constraint Satisfaction Problems
+QCPU-Ware can be used to solve [binary constraint satisfaction problems (BCSPs)](https://cogrpar.github.io/cogrpar.QCPUWare.github.io/docs.html#42-optimization-problems-that-can-be-submitted-through-qcpu-ware).  To formulate the problem, the user must first declare the **problem string**.  In order for the QCPU to be able to interpret the problem specified by the user, the entire problem is encoded in a single string called the problem string.  The process of constructing the problem string is made simple through the tools included in the QCPU-Ware java library.  For BCSPs, the problem string is structured like this:
+```
+1. QCPU Solver Mode (BCSP in this case)
+2. Constraints 
+3. The Number of Binary Variables
+```
+To formulate the BCSP, first declare the problem string.  The problem string is just like any other string in Java, and it can be declared like:
+```java
+String problemStr = ""; //Note you must also initiate the string (using = "" ), otherwise the problem def tools won't be able to append anthing to the problem string
+```
+Where the problem string is called problemStr.  Once the problem string has been declared and initiated, the rest of the problem can be encoded on the string.  The order of how the problem data is added to the problem string is extremly important, and if information is added to the string in the wrong order, then the QCPU will not be able to solve the problem.  First, the solver mode must be specified.  This can be done using the ```ModeSet``` method.  This method returns a string that can be appended to the end of the problem string.  To set the mode to BCSP, and to update the problem string, the following line can be used (once again, where the problem string is called problemStr):
+```java
+problemStr += qcpuWare.ModeSet("BCSP");
+```
+
 
 
 ## 7. Solving For Function Extremes 

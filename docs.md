@@ -424,6 +424,7 @@ class DoctorsOffice{
     }
   }
 }
+```
 When this program is run, it should output a valid solution that satisfies all of the constraints (there are more than one solution, so you could get one of several results).  The chart below presents all solutions, valid or not, as well as the number of constraints that they satisfy:
 
 This example problem is simple, and we can simply look on the chart for the solutions, rather than going to all of the trouble of running the above code, but this is only an example.  There are many more useful and complex BCSPs out there, and QCPU-Ware can be used to solve them on a quantum computer.

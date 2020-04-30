@@ -250,6 +250,12 @@ hostname -I
 The output should look something like ```192.168.1.1``` or ```10.0.0.1```.  If you have set up port forwarding and plan on using the public IP, you can use a site such as https://whatismyipaddress.com/ to get it.
 <iframe src="https://cogrpar.github.io/cogrpar.QCPUWare.github.io/imgs/Warning3.html" height="110" width="1000" scrolling='yes' frameBorder="0" align="left" ></iframe>
 
+#### 5.1.2 Using the SetQcpuIP Method to Set QCPU IP Address in the Java Library
+Once you have found your QCPU's IP address, you will need to use the ```SetQcpuIP``` method within the Java library to specify the address so that the library can submit problems to the QCPU.  Here is a basic rundown of the method and it's parameters:
+```
+qcpuWare.SetQcpuIP(IP);
+```
+
 
 ## 6. Solving Binary Constraint Satisfaction Problems
 

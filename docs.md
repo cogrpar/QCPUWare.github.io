@@ -321,11 +321,23 @@ constraints[2] = "constraint #3"
 constraints[3] = "constraint #4"
 constraints[4] = "constraint #5"
 ```
-Once all of the constraints have been defined, you can add the constraints and the number of variables to the problem string using the ```ConstSet``` method:
+(Replacing "constraint #n with an actual constraint, still in the form of a string).  Once all of the constraints have been defined, you can add the constraints and the number of variables to the problem string using the ```ConstSet``` method:
 ```java
 problemStr += qcpuWare.ConstSet(constraints, numOfVars);
 ```
+The problem string is now complete, and the problem has been defined.  It is time to send the problem string to your QCPU so that it can be solved on a quantum computer.  Submitting the problem and getting the result back as an array is all done using a single method: ```SendToQCPU```.  This method returns the solution to the problem as an array of doubles.  If your problem string is called ```problemStr```, and the solution array is called ```solution```, then to submitting the problem and getting the result could be done using this line:
+```java
+solution = qcpuWare.SendToQCPU(problemStr);
+```
+Once the solution array has been returned, it can be used in your code.  For example, here is a simple bit of code that loops over the array, displaying the solution to the user:
+```java
+//print results all nice and pretty
+for (int i = 0; i < solution.length; i++){
+  System.out.println("v" + i + " ≈ " + solution[i]);
+}
+```
 
+### 6.1 Solving BCSP Using QCPU-Ware Example: Doctor's Office
 
 
 ## 7. Solving For Function Extremes 

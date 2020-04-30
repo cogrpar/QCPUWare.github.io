@@ -238,6 +238,8 @@ The second kind of optimization problem that can be solved with QCPU-Ware is cal
 There are many useful applications for finding the function extremes of various types of functions, and QCPU-Ware gives you the ability to solve for those function extremes.
 
 ## 5. Connecting to Your QCPU
+The first thing that you will need to establish a connection between your QCPU and the QCPU-Ware Java library is your QCPU's IP address.  In most situations, this will be the private IP address, and in order for the connection to work, both the QCPU and the primary device must be on the same network.  If you would like the primary device and the QCPU to be on different networks, you must [set up port forwarding on your router](https://stackoverflow.com/questions/22730420/how-to-configure-apache-webserver-to-be-accessed-by-public-domain-or-static-ip), and use your QCPU's public IP.
+<iframe src="https://cogrpar.github.io/cogrpar.QCPUWare.github.io/imgs/Warning3.html" height="100" width="1000" scrolling='yes' frameBorder="0" align="left" ></iframe>
 
 
 ## 6. Solving Binary Constraint Satisfaction Problems

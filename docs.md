@@ -298,6 +298,33 @@ Where the problem string is called problemStr.  Once the problem string has been
 ```java
 problemStr += qcpuWare.ModeSet("BCSP");
 ```
+Once the mode has been set to BCSP, the constraints of the problem must be specified.  To define your constraints, you will want to begin by actually figure out how many variables you will be using, and what your constraints will be.  Once you have these two things, you will want to create an integer that has a value of how many variables you are using.  You will also want to declare a new string array that will store the constraints.  For this reason, the length of the array should be the number of constraints you are using.  If you want to solve a problem with 5 variables, and 3 constraints, then your code should look like this:
+```java
+int numOfVars = 5; //problem with 5 variables
+String[] constraints = new String[3] //problem with 3 constraints
+```
+Now assign the constraints from your problem to the members of the string array.  Each constraint should be a boolean statement (or a statement that can either be true or false.  As for the syntax of the constraints, each binary variable's name must be of the form ```vN``` where N is some value between 0 and the number of variables - 1, ie. ```v0, v1 ... vN```.  Along with the binary variables, constraints can also be made up of these symbols:
+```
+== -> equal to
+!= -> not equal to
+<, >, <=, >=, -> less than, greater than, less than or equal to, greater than or equal to.
+and -> and
+or -> or
+not -> not
+numbers can be used as well
+```
+Constraints can be made up of the binary variables and the above symbols.  Once you know your constraints, you can assign them to the members of the constraints array (as strings).  For example, something like:
+```java
+constraints[0] = "constraint #1"
+constraints[1] = "constraint #2"
+constraints[2] = "constraint #3"
+constraints[3] = "constraint #4"
+constraints[4] = "constraint #5"
+```
+Once all of the constraints have been defined, you can add the constraints and the number of variables to the problem string using the ```ConstSet``` method:
+```java
+problemStr += qcpuWare.ConstSet(constraints, numOfVars);
+```
 
 
 

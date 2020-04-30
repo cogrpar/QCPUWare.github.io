@@ -252,9 +252,17 @@ The output should look something like ```192.168.1.1``` or ```10.0.0.1```.  If y
 
 #### 5.1.2 Using the SetQcpuIP Method to Set QCPU IP Address in the Java Library
 Once you have found your QCPU's IP address, you will need to use the ```SetQcpuIP``` method within the Java library to specify the address so that the library can submit problems to the QCPU.  Here is a basic rundown of the method and it's parameters:
+```java
+qcpuWare.SetQcpuIP(String ip);
 ```
-qcpuWare.SetQcpuIP(IP);
+To use the method, simply insert the above line somewhere in your code, where the ```ip``` parameter is the QCPU IP address as a string, eg. ```"192.168.1.1"```.
+
+### 5.2 QCPU Server Password Using the SetQcpuPw Method
+This step only applies if you set a QCPU server password (see [above](https://cogrpar.github.io/cogrpar.QCPUWare.github.io/docs.html#312-running-the-qcpu-ware-qcpu-setup-script) for details).  If you did not set a server password, then you can skip this section.  A server password must be specified in order for the QCPU-Ware Java library to have access to your QCPU.  This can be done using the ```SetQcpuPw``` method.  Here is a basic rundown of the method and it's parameters:
+```java
+qcpuWare.SetQcpuPw(String pw);
 ```
+To use the method, simply insert the above line somewhere in your code, where the ```pw``` parameter is your QCPU's server password as a string, eg. ```password```.
 
 
 ## 6. Solving Binary Constraint Satisfaction Problems

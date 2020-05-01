@@ -450,3 +450,54 @@ This example problem is simple, and we can simply look on the chart for the solu
 
 
 ## 7. Solving For Function Extremes 
+QCPU-Ware can be used to solve for [function extremes](https://cogrpar.github.io/cogrpar.QCPUWare.github.io/docs.html#42-optimization-problems-that-can-be-submitted-through-qcpu-ware).  To formulate the problem, the user must first declare the **problem string**.  In order for the QCPU to be able to interpret the problem specified by the user, the entire problem is encoded in a single string called the problem string.  The process of constructing the problem string is made simple through the tools included in the QCPU-Ware java library.  For function extremes, the problem string is structured like this:
+```
+1. QCPU Solver Mode (funcExtreme in this case)
+2. Domain of Each Variable (Domains must be between 0 and some positive value)
+3. The Function Itself
+4. A Min/Max Boolean that Tells the QCPU if We Want To Find the Highest or Lowest Extreme
+```
+To formulate the Function Extreme Problem, first declare the problem string.  The problem string is just like any other string in Java, and it can be declared like:
+```java
+String problemStr = ""; //Note you must also initiate the string (using = "" ), otherwise the problem def tools won't be able to append anthing to the problem string
+```
+Where the problem string is called problemStr.  Once the problem string has been declared and initiated, the rest of the problem can be encoded on the string.  The order of how the problem data is added to the problem string is extremly important, and if information is added to the string in the wrong order, then the QCPU will not be able to solve the problem.  First, the solver mode must be specified.  This can be done using the ```ModeSet``` method.  This method returns a string that can be appended to the end of the problem string.  To set the mode to funcExtreme, and to update the problem string, the following line can be used (once again, where the problem string is called problemStr):
+```java
+problemStr += qcpuWare.ModeSet("funcExtreme");
+```
+Once the solver mode has been set to funcExtreme, the variable domains must be declared.  In function extreme problems, each variable must have a finite domain in order for the problem to have a definite solution.  In order for the problem to be defined in the QCPU-Ware Java library, each domain must be between 0 and some positive number.  This does not prevent the use of negative variable values, as variables can be subtracted in the actual function, but rather it makes the defenition of variable domains simpler.  Because the lower bound of every variable domain is 0, then the user must only specify the upper bound of each domain.  To specify the variable domains in the Java library, you must create an array of double values representing the upper bound of each domain.  This array of doubles is then passed into the ```DomainSet``` method which adds the domains to the problem string.  Here is an example of this process for a function with 4 variables:
+```java
+double[] domain = new double[4]; //create a double array to store the domains of 4 variables
+domain[0] = upper bound of the domain of variable 1; //plugging in the upper bound of each variable's domain
+domain[1] = upper bound of the domain of variable 2;
+domain[2] = upper bound of the domain of variable 3;
+domain[3] = upper bound of the domain of variable 4;
+
+problemStr += qcpuWare.DomainSet(domain); //add the domains to the problem string using the DomainSet method
+```
+Once the variable domains have been added to the problem string, the function itself can be defined.  Here are the rules for what functions can contain:
+1. Varaibles must be named v0, v1 ... vN for however many variables you have
+2. The supported operations are +, -, and * (division is not suported for a technical reason: in order for the function to be run on a quantum annealer, it must be converted into a binary function called a binary quadratic model (BQM).  Functions containing division can not really be converted into BQMs, so they can not be reliably manipulated by quantum annealers)
+3. Parentheses are supported and can be placed around terms so long as they are balanced
+4. Constants and coefficients can be used in the functions
+5. Every variable, opperation sign, parenthesis, constant and coefficient must be separated by a space
+Using the rules above, you can define your function as a string.  At this point, you will also want to decide if you want to find the maximum or minimum extreme of the function.  This is stored in a binary variable (true for maximum and false for minimum).  Here is an example of defining a random function with 4 variables, and the min/max boolean, which will be set to true (for maximum):
+```java
+String function = "2 * v0 - ( v1 + v2 ) - 0.1 * v3 * v0"; //this is the function to be min/maximized
+boolean max = true; //this is the min/max boolean, set to true for maximum
+```
+Once the function and the min/max boolean have been defined, then they can be appended to the problem string using the ```FunctionSet``` method:
+```java
+problemStr serverIn += qcpuWare.FunctionSet(function, max);
+```
+Now that the problem is fully defined, it can be submitted to a QCPU to be solved using the ```SendToQCPU``` method.  This method returns the solution to the problem as an array of doubles.  If your problem string is called ```problemStr```, and the solution array is called ```solution```, then to submitting the problem and getting the result could be done using this line:
+```java
+double[] solution = qcpuWare.SendToQCPU(problemStr);
+```
+Once the solution array has been returned, it can be used in your code.  For example, here is a simple bit of code that loops over the array, displaying the solution to the user:
+```java
+//print results all nice and pretty
+for (int i = 0; i < solution.length; i++){
+  System.out.println("v" + i + " ≈ " + solution[i]);
+}
+```

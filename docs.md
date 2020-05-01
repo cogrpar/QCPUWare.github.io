@@ -426,7 +426,24 @@ class DoctorsOffice{
 }
 ```
 When this program is run, it should output a valid solution that satisfies all of the constraints (there are more than one solution, so you could get one of several results).  The chart below presents all solutions, valid or not, as well as the number of constraints that they satisfy:
-
+| Variable Configuration | Number of Constraints Met | Valid |
+|------------------------|---------------------------|-------|
+| 0000                   | 3                         | Yes   |
+| 0001                   | 3                         | Yes   |
+| 0010                   | 3                         | Yes   |
+| 0100                   | 3                         | Yes   |
+| 1000                   | 3                         | Yes   |
+| 0011                   | 3                         | Yes   |
+| 0110                   | 3                         | Yes   |
+| 1100                   | 3                         | Yes   |
+| 0101                   | 3                         | Yes   |
+| 1010                   | 1                         | No    |
+| 1001                   | 1                         | No    |
+| 0111                   | 3                         | Yes   |
+| 1110                   | 2                         | No    |
+| 1011                   | 0                         | No    |
+| 1101                   | 2                         | No    |
+| 1111                   | 1                         | No    |
 This example problem is simple, and we can simply look on the chart for the solutions, rather than going to all of the trouble of running the above code, but this is only an example.  There are many more useful and complex BCSPs out there, and QCPU-Ware can be used to solve them on a quantum computer.
 
 

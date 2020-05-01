@@ -481,6 +481,7 @@ Once the variable domains have been added to the problem string, the function it
 3. Parentheses are supported and can be placed around terms so long as they are balanced
 4. Constants and coefficients can be used in the functions
 5. Every variable, opperation sign, parenthesis, constant and coefficient must be separated by a space
+
 Using the rules above, you can define your function as a string.  At this point, you will also want to decide if you want to find the maximum or minimum extreme of the function.  This is stored in a binary variable (true for maximum and false for minimum).  Here is an example of defining a random function with 4 variables, and the min/max boolean, which will be set to true (for maximum):
 ```java
 String function = "2 * v0 - ( v1 + v2 ) - 0.1 * v3 * v0"; //this is the function to be min/maximized

@@ -501,3 +501,5 @@ for (int i = 0; i < solution.length; i++){
   System.out.println("v" + i + " ≈ " + solution[i]);
 }
 ```
+
+### 7.1 Solving For Function Extremes Using QCPU-Ware Example: 6 Friends

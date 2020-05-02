@@ -340,8 +340,11 @@ for (int i = 0; i < solution.length; i++){
 ### 6.1 Solving BCSP Using QCPU-Ware Example: Doctor's Office
 This is an example of a BCSP and how it can be solved using QCPU-Ware.  Imagine a doctor's office with two patient waiting rooms: a sick patient room, and a healthy patient room.  Here are the rules: if a patient is sick, then they must wait in the sick room, but healthy patients can wait in either room.  No more than 15 people can wait in the sick waiting room at any given time, and there will be no check-ups with healthy patients if there are over 10 sick patients.  We can create a set of constraints that fully capture these rules, eg:
 **Constraint #1: sick patients must wait in the sick patients room and healthy patients can wait in either room
+
 Constraint #2: no more than 15 patients in the sick patients room
+
 Constraint #3: no check-ups with healthy patients if there are over 10 sick patients**
+
 Once we have these constraints, we can formally define our binary variables, based on the information in the constraints:
 ```
 health: 0 if you are healthy and 1 if you are sick
@@ -360,7 +363,7 @@ Now that we have defined our variables and constraints, we need to reformat the 
 health: "v0"
 room: "v1"
 maxSickCapacity: "v2"
-maxSickPatients: "v3
+maxSickPatients: "v3"
 ```
 Using the new variable names, the constraints become:
 ```java

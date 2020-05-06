@@ -508,3 +508,33 @@ for (int i = 0; i < solution.length; i++){
 ```
 
 ### 7.1 Solving For Function Extremes Using QCPU-Ware Example: 6 Friends
+This is an example of a function extreme problem, and how it can be solved using QCPU-Ware.  Imagine that you are having a party with 6 of your friends.  You will need to buy several items for the party.  Those items are: 
+
+**1. Party Hats (1$ each)**
+**2. Gift Baskets (5$ each)**
+**3. Icecream (4$ each)**
+**4. Cake Slices (7$ each)**
+
+The prices of each of those items are listed above.  Imagine that you know how many of your friends want each item:
+
+**3 of your friends want party hats**
+**6 of your friends want gift baskets**
+**2 of your friends want icecream cones**
+**5 of your friends want cake slices**
+
+We can model this situation using a function.  In this function, the variables represent how many of each item you buy, ie. H = number of party hats, G = number of gift baskets, I = number of icecream cones, and C = number of cake slices.  The function itself represents the total price of all of the goods that you have purchased.  We can get the price by multiplying the price of each item, by the value of the cooresponding variable (or the quantity of that item).  For example, the function of price in this situation could be:
+```
+Price(H, G, I, C) = (1$ * H) + (5$ * G) + (4$ * I) + (7$ * C)
+```
+The values of the variables themselves can be any integer value.  However, based on the number of friends that want each item, we do have a lower limit for the number of each item.  That is because if we got less of an item than this lower limit, then we won't have eneugh for each friend.  We can use these values to define the domains of each of these variables:
+
+**Domain(H) = [3, infinity)**
+**Domain(G) = [6, infinity)**
+**Domain(I) = [2, infinity)**
+**Domain(C) = [5, infinity)**
+
+Now that we have a function (```Price```) to model our situation, we can use it to find the configuration of all of the variables that will minimize ```Price```.  Right now, the function is simple eneugh to solve without the help of QCPU-Ware: we simply set the value of each variable to the lower limit of its domain.  By doing this, we can find the minimum price configuration:
+```
+MinConfig: H = 3, G = 6, I = 2, C = 5
+```
+This is our answer to the function extreme problem, but this is not a very good example, because we didn't even use QCPU-Ware to solve it.  We can make the situation more complicated, however, by introducing coupons:

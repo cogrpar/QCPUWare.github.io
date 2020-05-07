@@ -546,4 +546,33 @@ Now that we have a function (```Price```) to model our situation, we can use it 
 ```
 MinConfig: H = 3, G = 6, I = 2, C = 5
 ```
-This is our answer to the function extreme problem, but this is not a very good example, because we didn't even use QCPU-Ware to solve it.  We can make the situation more complicated, however, by introducing coupons:
+This is our answer to the function extreme problem, but this is not a very good example, because we didn't even use QCPU-Ware to solve it.  We can make the situation more complicated, however, by introducing coupons.  These coupons will change the prices of certain items depending on the quantities of other items that you purchase.  Lets imagine that you have the following coupons:
+
+**1. Square the difference in party hats and gift baskets and subtract that value from the total price**
+
+**2. Cube the difference in gift baskets and icecream cones and subtract that value from the total price**
+
+These coupons add a new component to our function of price.  Ie. we can add this term:
+```
+- (H - G)^2 - (G - I)^3
+```
+to our function.  Doing this results in the following function of price:
+```
+Price(H, G, I, C) = (1$ * H) + (5$ * G) + (4$ * I) + (7$ * C) - (H - G)^2 - (G - I)^3
+```
+The reason for adding the coupons was to make our function more complex, and something that can't easily be minimized in our heads.  Now that we have our function, we can rewrite it in such a way that it can be used in the QCPU-Ware Java library.  First of all, we need to expand the polynomial terms (the ones with ^2 and ^3), because exponents are not allowed when defining the problem.  Expanding the polynomials will give us:
+```
+Price(H, G, I, C) = (1$ * H) + (5$ * G) + (4$ * I) + (7$ * C) - (H * H) + (2 * H * G) - (G * G) - (G * G * G) + (3 * G * G * I) - (3 * G * I * I) + (I * I * I)
+```
+Now we need to rename the variables using the proper naming process.  Remember that the first variable must be v0, the second must be v1, and so on.  In this example, we can rename the variables like this:
+```
+H = v0
+G = v1
+I = v2
+C = v3
+```
+Plugging these into the function gives us:
+```
+Price(v0, v1, v2, v3) = (1 * v0) + (5 * v1) + (4 * v2) + (7 * v3) - (v0 * v0) + (2 * v0 * v1) - (v1 * v1) - (v1 * v1 * v1) + (3 * v1 * v1 * v2) - (3 * v1 * v2 * v2) + (v2 * v2 * v2)
+```
+Now we need to look at our variable domains.  In order for the QCPU-Ware function extreme solvers to work, the variables must have finite domains.  Right now, our variables actually have infinite domains, because they have no upper limit.  We will need to set an arbitrary upper bound for each of the variable domains.  

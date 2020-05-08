@@ -548,9 +548,9 @@ MinConfig: H = 3, G = 6, I = 2, C = 5
 ```
 This is our answer to the function extreme problem, but this is not a very good example, because we didn't even use QCPU-Ware to solve it.  We can make the situation more complicated, however, by introducing coupons.  These coupons will change the prices of certain items depending on the quantities of other items that you purchase.  Lets imagine that you have the following coupons:
 
-**1. Square the difference in party hats and gift baskets and subtract that value from the total price**
+**1. Square the difference in party hats and gift baskets and subtract that value from the total price (limited to 15 party hats)**
 
-**2. Cube the difference in gift baskets and icecream cones and subtract that value from the total price**
+**2. Cube the difference in gift baskets and icecream cones and subtract that value from the total price (limited to 12 baskets)**
 
 These coupons add a new component to our function of price.  Ie. we can add this term:
 ```
@@ -575,4 +575,4 @@ Plugging these into the function gives us:
 ```
 Price(v0, v1, v2, v3) = (1 * v0) + (5 * v1) + (4 * v2) + (7 * v3) - (v0 * v0) + (2 * v0 * v1) - (v1 * v1) - (v1 * v1 * v1) + (3 * v1 * v1 * v2) - (3 * v1 * v2 * v2) + (v2 * v2 * v2)
 ```
-Now we need to look at our variable domains.  In order for the QCPU-Ware function extreme solvers to work, the variables must have finite domains.  Right now, our variables actually have infinite domains, because they have no upper limit.  We will need to set an arbitrary upper bound for each of the variable domains.  
+Now we need to look at our variable domains.  In order for the QCPU-Ware function extreme solvers to work, the variables must have finite domains.  Right now, our variables actually have infinite domains, because they have no upper limit.  We will need to set an arbitrary upper bound for each of the variable domains.  In other words, we need to estimate an upper limit for each of the variable domains.  The upper bounds should be high enough that the optimal configuration of all of the variables should fall beneath it.  For the party hats variable (H), and the gift baskets variable (G), a good upper bound would be the maximum number of those items for which the coupons still apply.  That is because the coupons help to lower the price, and it would make sense for the optimal configuration of all of the variables to be a configuration in which the coupons apply.

@@ -484,7 +484,7 @@ Once the variable domains have been added to the problem string, the function it
 2. The supported operations are +, -, and * (division is not suported for a technical reason: in order for the function to be run on a quantum annealer, it must be converted into a binary function called a binary quadratic model (BQM).  Functions containing division can not really be converted into BQMs, so they can not be reliably manipulated by quantum annealers)
 3. Parentheses are supported and can be placed around terms so long as they are balanced
 4. Constants and coefficients can be used in the functions
-5. Every variable, opperation sign, parenthesis, constant and coefficient must be separated by a space
+5. Every variable, opperation sign, constant and coefficient must be separated by a space
 
 Using the rules above, you can define your function as a string.  At this point, you will also want to decide if you want to find the maximum or minimum extreme of the function.  This is stored in a binary variable (true for maximum and false for minimum).  Here is an example of defining a random function with 4 variables, and the min/max boolean, which will be set to true (for maximum):
 ```java
@@ -575,4 +575,49 @@ Plugging these into the function gives us:
 ```
 Price(v0, v1, v2, v3) = (1 * v0) + (5 * v1) + (4 * v2) + (7 * v3) - (v0 * v0) + (2 * v0 * v1) - (v1 * v1) - (v1 * v1 * v1) + (3 * v1 * v1 * v2) - (3 * v1 * v2 * v2) + (v2 * v2 * v2)
 ```
-Now we need to look at our variable domains.  In order for the QCPU-Ware function extreme solvers to work, the variables must have finite domains.  Right now, our variables actually have infinite domains, because they have no upper limit.  We will need to set an arbitrary upper bound for each of the variable domains.  In other words, we need to estimate an upper limit for each of the variable domains.  The upper bounds should be high enough that the optimal configuration of all of the variables should fall beneath it.  For the party hats variable (H), and the gift baskets variable (G), a good upper bound would be the maximum number of those items for which the coupons still apply.  That is because the coupons help to lower the price, and it would make sense for the optimal configuration of all of the variables to be a configuration in which the coupons apply.
+Now we need to look at our variable domains.  In order for the QCPU-Ware function extreme solvers to work, the variables must have finite domains.  Right now, our variables actually have infinite domains, because they have no upper limit.  We will need to set an arbitrary upper bound for each of the variable domains.  In other words, we need to estimate an upper limit for each of the variable domains.  The upper bounds should be high enough that the optimal configuration of all of the variables should fall beneath it.  Take the  hats (H), and the gift baskets (G).  Both of these variables are important to the coupons, which help to lower the price.  We can be pretty sure that the configuration of all of the variables that yields the lowest price will utilize the coupons to some extent.  However, both coupons only apply if the values of H and G are below a certian value (limited to 15 party hats and limited to 12 baskets).  Because the optimal configuration will probably be one that uses the coupons, then we can set the upper bounds of the domains of H and G to the upper bound specified by the coupons (15 and 12).  Using those upper bounds, we can set the domains of H and G to look like this:
+
+**Domain(H) = [3, 15]**
+
+**Domain(G) = [6, 12]**
+
+Similarly, in order for the coupons to apply, (or at least for them to be helpful), the value of icecream cones (I), should be less than the value of gift baskets (see the second coupon).  This means that the domain upper bound for I should be no less than the upper bound of G, which is 12:
+
+**Domain(I) = [2, 12]**
+
+Finally we need to deal with the cake slices variable (C).  This variable does not affect any of the coupons, so in the optimal configuration its value will be as low as possible.  This means that we could just set the upper bound of its domain to be equal to the lower bound.  However, QCPU-Ware solvers will not be able to handle a domain with the same upper and lower bound, so we can just set the upper bound to one greater than the lower bound.  The lower bound for variable C is 5, so we can set the upper bound to 1+5 or 6:
+
+**Domain(C) = [5, 6]**
+
+Now all of the variables have finite domains.  Here they are, with the new variable names:
+
+**Domain(v0) = [3, 15]**
+
+**Domain(v1) = [6, 12]**
+
+**Domain(v2) = [2, 12]**
+
+**Domain(v3) = [5, 6]**
+
+There is only one last thing that we need to do to our function before we can solve for its extreme with the QCPU-Ware java library.  In order for the solver to work properly, the variable domains must be between 0 and some upper bound, which is not the case with any of our variables.  There is a simple trick to fix this however.  Take the cake slices variable (C), for example.  If we want to change it's domain to have a lower bound of 0, then we can shift both the upper and lower bounds by 5, which would give us a domain of [0, 1].  However, you can probably see the problem.  We need to make sure that the solver takes into account that C's actual domain is 5 units greater than the domain that we gave it.  In order to make the function minimize in the same way, we need to add the same value that we shifted the domain by, to C in the function.  In other words, we need to replace every occurrence of C in the function, with C+5.  This will offset the act of us shifting the domain by -5, and the function will minimize in the same way as when C had a domain of [5, 6].  We will also need to add 5 to the value of C that the solver returns, which will make sure that the result that we get from the solver also falls within the original domain.  When we apply this process to the rest of the variables, and correspondingly change the function, we get the following domains and function:
+
+**Domain(v0) = [0, 12] (shift -3)**
+
+**Domain(v1) = [0, 6] (shift -6)**
+
+**Domain(v2) = [0, 10] (shift -2)**
+
+**Domain(v3) = [0, 1] (shift -5)**
+
+```
+Price(v0, v1, v2, v3) = (1 * (v0 + 3)) + (5 * (v1 + 6)) + (4 * (v2 + 2)) + (7 * (v3 + 5)) - ((v0 + 3) * (v0 + 3)) + (2 * (v0 + 3) * (v1 + 6)) - ((v1 + 6) * (v1 + 6)) - ((v1 + 6) * (v1 + 6) * (v1 + 6)) + (3 * (v1 + 6) * (v1 + 6) * (v2 + 2)) - (3 * (v1 + 6) * (v2 + 2) * (v2 + 2)) + ((v2 + 2) * (v2 + 2) * (v2 + 2))
+```
+or, cleaning things up a bit and expanding:
+```
+Price(v0, v1, v2, v3) = (v0 + 3) + (5 * v1 + 30) + (4 * v2 + 8) + (7 * v3 + 35) - (v0 * v0) - (6 * v0) + (2 * v0 * v1) + (12 * v0) + (6 * v1) -( v1 * v1) - (12 * v1) - (v1 * v1 * v1) - (18 * v1 * v1) - (108 * v1) + (3 * v1 * v1 * v2) + (6 * v1 * v1) + (36 * v1 * v2) + (72 * v1) + (108 * v2) - (3 * v1 * v2 * v2) - (12 * v1 * v2) - (12 * v1) - (18 * v2 * v2) - (72 * v2) + (v2 * v2 * v2) + (6 * v2 * v2) + (12 * v2) - 73
+```
+We can remove the ```-73``` at the end, because it will not change the way in which the function minimizes.  This gives us a final function of:
+```
+Price(v0, v1, v2, v3) = (v0 + 3) + (5 * v1 + 30) + (4 * v2 + 8) + (7 * v3 + 35) - (v0 * v0) - (6 * v0) + (2 * v0 * v1) + (12 * v0) + (6 * v1) -( v1 * v1) - (12 * v1) - (v1 * v1 * v1) - (18 * v1 * v1) - (108 * v1) + (3 * v1 * v1 * v2) + (6 * v1 * v1) + (36 * v1 * v2) + (72 * v1) + (108 * v2) - (3 * v1 * v2 * v2) - (12 * v1 * v2) - (12 * v1) - (18 * v2 * v2) - (72 * v2) + (v2 * v2 * v2) + (6 * v2 * v2) + (12 * v2)
+```
+This is our final setup, and we can begin plugging the problem into the QCPU-Ware Java library.  One last reminder: because we shifted the variable domains to make the lower bound 0, we will need to add the number of units each domain was shifted to the results that we get back from the solver.  This will guarantee that each variable's value is within the original domain.

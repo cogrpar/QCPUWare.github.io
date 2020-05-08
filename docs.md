@@ -488,16 +488,17 @@ Once the variable domains have been added to the problem string, the function it
 
 Using the rules above, you can define your function as a string.  At this point, you will also want to decide if you want to find the maximum or minimum extreme of the function.  This is stored in a binary variable (true for maximum and false for minimum).  Here is an example of defining a random function with 4 variables, and the min/max boolean, which will be set to true (for maximum):
 ```java
-String function = "2 * v0 - ( v1 + v2 ) - 0.1 * v3 * v0"; //this is the function to be min/maximized
+String function = "2 * v0 - (v1 + v2) - 0.1 * v3 * v0"; //this is the function to be min/maximized
 boolean max = true; //this is the min/max boolean, set to true for maximum
 ```
 Once the function and the min/max boolean have been defined, then they can be appended to the problem string using the ```FunctionSet``` method:
 ```java
-problemStr serverIn += qcpuWare.FunctionSet(function, max);
+problemStr += qcpuWare.FunctionSet(function, max);
 ```
 Now that the problem is fully defined, it can be submitted to a QCPU to be solved using the ```SendToQCPU``` method.  This method returns the solution to the problem as an array of doubles.  If your problem string is called ```problemStr```, and the solution array is called ```solution```, then to submitting the problem and getting the result could be done using this line:
 ```java
-double[] solution = qcpuWare.SendToQCPU(problemStr);
+double[] solution = new double[4];
+solution = qcpuWare.SendToQCPU(problemStr);
 ```
 Once the solution array has been returned, it can be used in your code.  For example, here is a simple bit of code that loops over the array, displaying the solution to the user:
 ```java
@@ -620,4 +621,108 @@ We can remove the ```-73``` at the end, because it will not change the way in wh
 ```
 Price(v0, v1, v2, v3) = (v0 + 3) + (5 * v1 + 30) + (4 * v2 + 8) + (7 * v3 + 35) - (v0 * v0) - (6 * v0) + (2 * v0 * v1) + (12 * v0) + (6 * v1) -( v1 * v1) - (12 * v1) - (v1 * v1 * v1) - (18 * v1 * v1) - (108 * v1) + (3 * v1 * v1 * v2) + (6 * v1 * v1) + (36 * v1 * v2) + (72 * v1) + (108 * v2) - (3 * v1 * v2 * v2) - (12 * v1 * v2) - (12 * v1) - (18 * v2 * v2) - (72 * v2) + (v2 * v2 * v2) + (6 * v2 * v2) + (12 * v2)
 ```
-This is our final setup, and we can begin plugging the problem into the QCPU-Ware Java library.  One last reminder: because we shifted the variable domains to make the lower bound 0, we will need to add the number of units each domain was shifted to the results that we get back from the solver.  This will guarantee that each variable's value is within the original domain.
+This is our final setup, and we can begin plugging the problem into the QCPU-Ware Java library.  One last reminder: because we shifted the variable domains to make the lower bound 0, we will need to add the number of units each domain was shifted to the results that we get back from the solver.  This will guarantee that each variable's value is within the original domain.  The first thing that we need to do in order to define the problem in the Java library, is to declare a new instance of the Java library, fill out the QCPU connection info, declare the problem string, and set the solver mode to ```funcExtreme```:
+```java
+qcpuWare qcpu = new qcpuWare(); //create instance of library
+qcpu.SetQcpuIP("192.168.1.1"); //connection info
+qcpu.SetQcpuPw("password");
+
+String problemStr = ""; //create problem string
+problemStr += qcpu.ModeSet("funcExtreme"); //set mode to funcExtreme
+```
+Next, we need to declare the array that will store the variable domains:
+```java
+double[] domain = new double[4]; //create a double array to store the domains of 4 variables
+```
+Next, we need to fill in the variable domains.  Each element of the array is the upper bound of the corresponding variable.  The first element is the upper bound of the first variable's domain, and so on.  For reference, here are our (shifted) domains:
+
+**Domain(v0) = [0, 12]**
+
+**Domain(v1) = [0, 6]**
+
+**Domain(v2) = [0, 10]**
+
+**Domain(v3) = [0, 1]**
+
+And here is how the ```domain``` array would be filled out:
+```java 
+domain[0] = 12; //plugging in the upper bound of each variable's domain
+domain[1] = 6;
+domain[2] = 10;
+domain[3] = 1;
+```
+This array can now be appended to the problem string using the ```DomainSet``` method:
+```java
+problemStr += qcpu.DomainSet(domain); //add the domains to the problem string using the DomainSet method
+```
+Now we can create a string to store the function itself.  The string will be called ```function```:
+```java
+String function = "(v0 + 3) + (5 * v1 + 30) + (4 * v2 + 8) + (7 * v3 + 35) - (v0 * v0) - (6 * v0) + (2 * v0 * v1) + (12 * v0) + (6 * v1) -( v1 * v1) - (12 * v1) - (v1 * v1 * v1) - (18 * v1 * v1) - (108 * v1) + (3 * v1 * v1 * v2) + (6 * v1 * v1) + (36 * v1 * v2) + (72 * v1) + (108 * v2) - (3 * v1 * v2 * v2) - (12 * v1 * v2) - (12 * v1) - (18 * v2 * v2) - (72 * v2) + (v2 * v2 * v2) + (6 * v2 * v2) + (12 * v2)"; //this is the function that encodes the problem
+```
+Next, we must declare a boolean variable which will tell the solver if we want to minimize or maximize the function.  If the boolean is set to true, the solver will maximize, and if it is set to false, it will minimize.  Our function is a function of price, so we will set the boolean to false:
+```java
+boolean max = false; //this is the min/max boolean, set to false to minimize
+```
+We can now append the function and the min/max boolean to the problem string using the ```FunctionSet``` method:
+```java
+problemStr serverIn += qcpu.FunctionSet(function, max);
+```
+Now we can send the problem to your QCPU to solve it on a quantum computer.  First though, we will need to declare an array to store the results in:
+```java
+double[] solution = new double[4]; //same length as the number of variables as it stores the results
+solution = qcpuWare.SendToQCPU(problemStr); //send to QCPU to be solved
+```
+We now have the results.  Remember, we need to shift them back so they fall in the correct domain.  We can do that like this:
+```java
+solution[0] += 3; //shift v0 back 3 units
+solution[1] += 6; //shift v1 back 6 units
+solution[2] += 2; //shift v2 back 2 units
+solution[3] += 5; //shift v3 back 5 units
+```
+Now that we have the result, we can print it to the user like this:
+```java
+//print results all nice and pretty
+for (int i = 0; i < solution.length; i++){
+  System.out.println("v" + i + " ≈ " + solution[i]);
+}
+```
+That is all of the code to find the quantity of each item that you should purchase to save the most money possible.  Here is all of the code together:
+```java
+class SixFriends{
+  public static void main (String[] args){
+    qcpuWare qcpu = new qcpuWare(); //create instance of library
+	qcpu.SetQcpuIP("192.168.1.1"); //connection info
+	qcpu.SetQcpuPw("password");
+
+	String problemStr = ""; //create problem string
+	problemStr += qcpu.ModeSet("funcExtreme"); //set mode to funcExtreme
+    
+    double[] domain = new double[4]; //create a double array to store the domains of 4 variables
+	domain[0] = 12; //plugging in the upper bound of each variable's domain
+	domain[1] = 6;
+	domain[2] = 10;
+	domain[3] = 1;
+	
+	problemStr += qcpu.DomainSet(domain); //add the domains to the problem string using the DomainSet method
+	
+	String function = "(v0 + 3) + (5 * v1 + 30) + (4 * v2 + 8) + (7 * v3 + 35) - (v0 * v0) - (6 * v0) + (2 * v0 * v1) + (12 * v0) + (6 * v1) -( v1 * v1) - (12 * v1) - (v1 * v1 * v1) - (18 * v1 * v1) - (108 * v1) + (3 * v1 * v1 * v2) + (6 * v1 * v1) + (36 * v1 * v2) + (72 * v1) + (108 * v2) - (3 * v1 * v2 * v2) - (12 * v1 * v2) - (12 * v1) - (18 * v2 * v2) - (72 * v2) + (v2 * v2 * v2) + (6 * v2 * v2) + (12 * v2)"; //this is the function that encodes the problem
+	boolean max = false; //this is the min/max boolean, set to false to minimize
+	
+	problemStr serverIn += qcpu.FunctionSet(function, max);
+	
+	double[] solution = new double[4]; //same length as the number of variables as it stores the results
+	solution = qcpuWare.SendToQCPU(problemStr); //send to QCPU to be solved
+	
+	solution[0] += 3; //shift v0 back 3 units
+	solution[1] += 6; //shift v1 back 6 units
+	solution[2] += 2; //shift v2 back 2 units
+	solution[3] += 5; //shift v3 back 5 units
+	
+	for (int i = 0; i < solution.length; i++){
+	  System.out.println("v" + i + " ≈ " + solution[i]);
+	}
+  }
+}
+```
+When the code is run, it should display an output similar to:
+

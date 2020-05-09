@@ -615,11 +615,11 @@ Price(v0, v1, v2, v3) = (1 * (v0 + 3)) + (5 * (v1 + 6)) + (4 * (v2 + 2)) + (7 * 
 ```
 or, cleaning things up a bit and expanding:
 ```
-Price(v0, v1, v2, v3) = (v0 + 3) + (5 * v1 + 30) + (4 * v2 + 8) + (7 * v3 + 35) - (v0 * v0) - (6 * v0) + (2 * v0 * v1) + (12 * v0) + (6 * v1) -( v1 * v1) - (12 * v1) - (v1 * v1 * v1) - (18 * v1 * v1) - (108 * v1) + (3 * v1 * v1 * v2) + (6 * v1 * v1) + (36 * v1 * v2) + (72 * v1) + (108 * v2) - (3 * v1 * v2 * v2) - (12 * v1 * v2) - (12 * v1) - (18 * v2 * v2) - (72 * v2) + (v2 * v2 * v2) + (6 * v2 * v2) + (12 * v2) - 73
+Price(v0, v1, v2, v3) = (v0 + 3) + (5 * v1 + 30) + (4 * v2 + 8) + (7 * v3 + 35) - (v0 * v0) - (6 * v0) + (2 * v0 * v1) + (12 * v0) + (6 * v1) -( v1 * v1) - (12 * v1) - (v1 * v1 * v1) - (18 * v1 * v1) - (108 * v1) + (3 * v1 * v1 * v2) + (6 * v1 * v1) + (36 * v1 * v2) + (72 * v1) + (108 * v2) - (3 * v1 * v2 * v2) - (12 * v1 * v2) - (12 * v1) - (18 * v2 * v2) - (72 * v2) + (v2 * v2 * v2) + (6 * v2 * v2) + (12 * v2) + 3
 ```
-We can remove the ```-73``` at the end, because it will not change the way in which the function minimizes.  This gives us a final function of:
+We can remove the ```+ 3``` at the end, because it will not change the way in which the function minimizes.  This gives us a final function of:
 ```
-Price(v0, v1, v2, v3) = (v0 + 3) + (5 * v1 + 30) + (4 * v2 + 8) + (7 * v3 + 35) - (v0 * v0) - (6 * v0) + (2 * v0 * v1) + (12 * v0) + (6 * v1) -( v1 * v1) - (12 * v1) - (v1 * v1 * v1) - (18 * v1 * v1) - (108 * v1) + (3 * v1 * v1 * v2) + (6 * v1 * v1) + (36 * v1 * v2) + (72 * v1) + (108 * v2) - (3 * v1 * v2 * v2) - (12 * v1 * v2) - (12 * v1) - (18 * v2 * v2) - (72 * v2) + (v2 * v2 * v2) + (6 * v2 * v2) + (12 * v2)
+Price(v0, v1, v2, v3) = (v0) + (5 * v1) + (4 * v2) + (7 * v3) - (v0 * v0) - (6 * v0) + (2 * v0 * v1) + (12 * v0) + (6 * v1) -( v1 * v1) - (12 * v1) - (v1 * v1 * v1) - (18 * v1 * v1) - (108 * v1) + (3 * v1 * v1 * v2) + (6 * v1 * v1) + (36 * v1 * v2) + (72 * v1) + (108 * v2) - (3 * v1 * v2 * v2) - (12 * v1 * v2) - (12 * v1) - (18 * v2 * v2) - (72 * v2) + (v2 * v2 * v2) + (6 * v2 * v2) + (12 * v2)
 ```
 This is our final setup, and we can begin plugging the problem into the QCPU-Ware Java library.  One last reminder: because we shifted the variable domains to make the lower bound 0, we will need to add the number of units each domain was shifted to the results that we get back from the solver.  This will guarantee that each variable's value is within the original domain.  The first thing that we need to do in order to define the problem in the Java library, is to declare a new instance of the Java library, fill out the QCPU connection info, declare the problem string, and set the solver mode to ```funcExtreme```:
 ```java
@@ -657,7 +657,7 @@ problemStr += qcpu.DomainSet(domain); //add the domains to the problem string us
 ```
 Now we can create a string to store the function itself.  The string will be called ```function```:
 ```java
-String function = "(v0 + 3) + (5 * v1 + 30) + (4 * v2 + 8) + (7 * v3 + 35) - (v0 * v0) - (6 * v0) + (2 * v0 * v1) + (12 * v0) + (6 * v1) -( v1 * v1) - (12 * v1) - (v1 * v1 * v1) - (18 * v1 * v1) - (108 * v1) + (3 * v1 * v1 * v2) + (6 * v1 * v1) + (36 * v1 * v2) + (72 * v1) + (108 * v2) - (3 * v1 * v2 * v2) - (12 * v1 * v2) - (12 * v1) - (18 * v2 * v2) - (72 * v2) + (v2 * v2 * v2) + (6 * v2 * v2) + (12 * v2)"; //this is the function that encodes the problem
+String function = "(v0) + (5 * v1) + (4 * v2) + (7 * v3) - (v0 * v0) - (6 * v0) + (2 * v0 * v1) + (12 * v0) + (6 * v1) -( v1 * v1) - (12 * v1) - (v1 * v1 * v1) - (18 * v1 * v1) - (108 * v1) + (3 * v1 * v1 * v2) + (6 * v1 * v1) + (36 * v1 * v2) + (72 * v1) + (108 * v2) - (3 * v1 * v2 * v2) - (12 * v1 * v2) - (12 * v1) - (18 * v2 * v2) - (72 * v2) + (v2 * v2 * v2) + (6 * v2 * v2) + (12 * v2)"; //this is the function that encodes the problem
 ```
 Next, we must declare a boolean variable which will tell the solver if we want to minimize or maximize the function.  If the boolean is set to true, the solver will maximize, and if it is set to false, it will minimize.  Our function is a function of price, so we will set the boolean to false:
 ```java
@@ -691,36 +691,36 @@ That is all of the code to find the quantity of each item that you should purcha
 class SixFriends{
   public static void main (String[] args){
     qcpuWare qcpu = new qcpuWare(); //create instance of library
-	qcpu.SetQcpuIP("192.168.1.1"); //connection info
-	qcpu.SetQcpuPw("password");
+    qcpu.SetQcpuIP("192.168.1.1"); //connection info
+    qcpu.SetQcpuPw("password");
 
-	String problemStr = ""; //create problem string
-	problemStr += qcpu.ModeSet("funcExtreme"); //set mode to funcExtreme
+    String problemStr = ""; //create problem string
+    problemStr += qcpu.ModeSet("funcExtreme"); //set mode to funcExtreme
     
     double[] domain = new double[4]; //create a double array to store the domains of 4 variables
-	domain[0] = 12; //plugging in the upper bound of each variable's domain
-	domain[1] = 6;
-	domain[2] = 10;
-	domain[3] = 1;
+    domain[0] = 12; //plugging in the upper bound of each variable's domain
+    domain[1] = 6;
+    domain[2] = 10;
+    domain[3] = 1;
 	
-	problemStr += qcpu.DomainSet(domain); //add the domains to the problem string using the DomainSet method
+    problemStr += qcpu.DomainSet(domain); //add the domains to the problem string using the DomainSet method
 	
-	String function = "(v0 + 3) + (5 * v1 + 30) + (4 * v2 + 8) + (7 * v3 + 35) - (v0 * v0) - (6 * v0) + (2 * v0 * v1) + (12 * v0) + (6 * v1) -( v1 * v1) - (12 * v1) - (v1 * v1 * v1) - (18 * v1 * v1) - (108 * v1) + (3 * v1 * v1 * v2) + (6 * v1 * v1) + (36 * v1 * v2) + (72 * v1) + (108 * v2) - (3 * v1 * v2 * v2) - (12 * v1 * v2) - (12 * v1) - (18 * v2 * v2) - (72 * v2) + (v2 * v2 * v2) + (6 * v2 * v2) + (12 * v2)"; //this is the function that encodes the problem
-	boolean max = false; //this is the min/max boolean, set to false to minimize
+    String function = "(v0) + (5 * v1) + (4 * v2) + (7 * v3) - (v0 * v0) - (6 * v0) + (2 * v0 * v1) + (12 * v0) + (6 * v1) -( v1 * v1) - (12 * v1) - (v1 * v1 * v1) - (18 * v1 * v1) - (108 * v1) + (3 * v1 * v1 * v2) + (6 * v1 * v1) + (36 * v1 * v2) + (72 * v1) + (108 * v2) - (3 * v1 * v2 * v2) - (12 * v1 * v2) - (12 * v1) - (18 * v2 * v2) - (72 * v2) + (v2 * v2 * v2) + (6 * v2 * v2) + (12 * v2)"; //this is the function that encodes the problem
+    boolean max = false; //this is the min/max boolean, set to false to minimize
 	
-	problemStr serverIn += qcpu.FunctionSet(function, max);
+    problemStr serverIn += qcpu.FunctionSet(function, max);
 	
-	double[] solution = new double[4]; //same length as the number of variables as it stores the results
-	solution = qcpuWare.SendToQCPU(problemStr); //send to QCPU to be solved
+    double[] solution = new double[4]; //same length as the number of variables as it stores the results
+    solution = qcpuWare.SendToQCPU(problemStr); //send to QCPU to be solved
 	
-	solution[0] += 3; //shift v0 back 3 units
-	solution[1] += 6; //shift v1 back 6 units
-	solution[2] += 2; //shift v2 back 2 units
-	solution[3] += 5; //shift v3 back 5 units
+    solution[0] += 3; //shift v0 back 3 units
+    solution[1] += 6; //shift v1 back 6 units
+    solution[2] += 2; //shift v2 back 2 units
+    solution[3] += 5; //shift v3 back 5 units
 	
-	for (int i = 0; i < solution.length; i++){
-	  System.out.println("v" + i + " ≈ " + solution[i]);
-	}
+    for (int i = 0; i < solution.length; i++){
+      System.out.println("v" + i + " ≈ " + solution[i]);
+    }
   }
 }
 ```

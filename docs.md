@@ -725,4 +725,20 @@ class SixFriends{
 }
 ```
 When the code is run, it should display an output similar to:
+```
+v0 ≈ 3.0
+v1 ≈ 9.75
+v2 ≈ 2.0
+v3 ≈ 5.0
+```
+Meaning that our final result to minimize the price when coupons are applied is that you should buy your six friends
 
+**3 party hats**
+
+**10 gift baskets**
+
+**2 icecream cones**
+
+**and 5 slices of cake**
+
+This example problem demonstrated the process that can be used to define and solve function extreme problems with the QCPU-Ware Java library.

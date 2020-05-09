@@ -665,7 +665,7 @@ boolean max = false; //this is the min/max boolean, set to false to minimize
 ```
 We can now append the function and the min/max boolean to the problem string using the ```FunctionSet``` method:
 ```java
-problemStr serverIn += qcpu.FunctionSet(function, max);
+problemStr += qcpu.FunctionSet(function, max);
 ```
 Now we can send the problem to your QCPU to solve it on a quantum computer.  First though, we will need to declare an array to store the results in:
 ```java
@@ -708,7 +708,7 @@ class SixFriends{
     String function = "(v0) + (5 * v1) + (4 * v2) + (7 * v3) - (v0 * v0) - (6 * v0) + (2 * v0 * v1) + (12 * v0) + (6 * v1) -( v1 * v1) - (12 * v1) - (v1 * v1 * v1) - (18 * v1 * v1) - (108 * v1) + (3 * v1 * v1 * v2) + (6 * v1 * v1) + (36 * v1 * v2) + (72 * v1) + (108 * v2) - (3 * v1 * v2 * v2) - (12 * v1 * v2) - (12 * v1) - (18 * v2 * v2) - (72 * v2) + (v2 * v2 * v2) + (6 * v2 * v2) + (12 * v2)"; //this is the function that encodes the problem
     boolean max = false; //this is the min/max boolean, set to false to minimize
 	
-    problemStr serverIn += qcpu.FunctionSet(function, max);
+    problemStr += qcpu.FunctionSet(function, max);
 	
     double[] solution = new double[4]; //same length as the number of variables as it stores the results
     solution = qcpuWare.SendToQCPU(problemStr); //send to QCPU to be solved

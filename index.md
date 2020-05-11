@@ -14,7 +14,7 @@ View the QCPUWare Repo:
 [Repo](https://github.com/cogrpar/qcpuWARE/)
 
 Video Tutorials:
-[Video Tutorials](https://www.youtube.com/channel/UCNy6WfWTRKS4vya6KlD4Hxg)
+[Video Tutorials](https://www.youtube.com/playlist?list=PLx7yVBjFcemq0LEv_ykz2v0H4t93c_GS6)
 
 Docs:
 [QCPU-Ware Documentation](docs.md)
@@ -23,7 +23,7 @@ Having issues?
 [QCPUWare - Issues](https://github.com/cogrpar/qcpuWARE/issues)
 
 General Info:
-[General Info Video](https://www.youtube.com/channel/UCNy6WfWTRKS4vya6KlD4Hxg) <!-- link this to info video -->
+[General Info Video](https://www.youtube.com/watch?v=Ex7LFJfccIU) <!-- link this to info video -->
 
 ### Latest Release:
 [Release Trailer](QCPU-Ware Trailer.mp4)

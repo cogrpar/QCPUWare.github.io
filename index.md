@@ -3,6 +3,10 @@
 ![QCPU-Ware Logo](QCPU.png)
 
 ### About QCPU-Ware
+The project aims to demonstrate how hybrid quantum approaches can be imprlemented on distributed networks of devices and adds a level of abstraction on top of the Dwave Ocean SDK.
+
+Note: The code in this repo is only a proof of concept and is not maintained. Use at your own risk.
+
 Have you ever wanted to run a program on a quantum computer?  [Quantum computing](https://en.wikipedia.org/wiki/Quantum_computing) is an amazing technology that has made staggering progress over the last few years.  The goal of QCPU-Ware is to alow anyone interested in software development to be able to use quantum computers to solve problems.  Through the use of a simple Java library, and a device called a [QCPU](https://cogrpar.github.io/cogrpar.QCPUWare.github.io/docs.html#12-what-is-a-qcpu), people with all levels of experience can learn to solve problems on a real quantum computer, thanks to QCPU-Ware!
 
 ### This page is home to tutorials, documentation, and downloads for QCPU-Ware

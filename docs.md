@@ -1,5 +1,9 @@
 # Welcome to QCPU-Ware Documentation
 
+The project aims to demonstrate how hybrid quantum approaches can be imprlemented on distributed networks of devices and adds a level of abstraction on top of the Dwave Ocean SDK.
+
+Note: The code in this repo is only a proof of concept and is not maintained. Use at your own risk.
+
 ## 1. Introduction
 ### 1.1 What is QCPU-Ware?
 QCPU-Ware is software that allows users to solve problems on a quantum computer without needing to know anything about quantum computing.  QCPU-Ware is built on D-Wave Systems' Leap Ocean-SDK [D-Wave Leap](https://www.dwavesys.com/take-leap).  QCPU-Ware takes the Ocean-SDK and makes the entire development process much more user-friendly.  QCPU-Ware provides the user with simple and easy to use tools to formulate problems to be solved on the D-Wave quantum computers.  By using the QCPU-Ware Java library, users can define real-world problems to be solved on the D-Wave System like never before.  They can do all of this without needing to know anything about how quantum computing works.

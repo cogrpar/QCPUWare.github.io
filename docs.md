@@ -40,7 +40,7 @@ Using the QCPU-Ware Java library, users specify the ip address of the QCPU.  Thi
 #### 3.1.1 Getting Started
 Remember that whatever device you plan on using as your QCPU must be running Debian based Linux.  If you are going to be using an internal QCPU, and Linux is not your main operating system, you will need to set up a virtual machine.  These docs will not cover setting up a virtual machine, but you can see [this tutorial](https://brb.nci.nih.gov/seqtools/installUbuntu.html), or this [QCPU-Ware setup video](https://www.youtube.com/watch?v=ATcnSRyrvFA) for more information.  If you plan on using an external QCPU, make sure that the external device has Debian based Linux set up on it.  If you are using a Raspberry Pi, see [this guide](https://www.raspberrypi.org/documentation/installation/installing-images/README.md) or the [QCPU-Ware setup video](https://www.youtube.com/channel/UCNy6WfWTRKS4vya6KlD4Hxg) for information on installing and setting up the operating system, [Raspbian](https://www.raspberrypi.org/documentation/raspbian/).
 
-<iframe src="https://cogrpar.github.io/cogrpar.QCPUWare.github.io/imgs/Warning1.html" height="1600" width="1000" scrolling='yes' frameBorder="0" align="left" ></iframe>
+<iframe src="./imgs/Warning1.html" height="1600" width="1000" scrolling='yes' frameBorder="0" align="left" ></iframe>
 
 QCPU-Ware includes a QCPU setup script that can be run on any Debian Linux device to set up a QCPU on that device.  Before you can clone the QCPU-Ware repository and run the setup script on a device, you need to make sure that the device has the proper tools installed to run the script.  The device will need [**git**](https://www.atlassian.com/git/tutorials/what-is-git) installed to clone the QCPU-Ware repository, and [**python3**](https://www.python.org/) (as well as [**python3-pip**](https://pip.pypa.io/en/stable/)) installed to run the script.  To install these programs, run this command on the device you will be using as your QCPU:
 ```
@@ -58,8 +58,8 @@ If you get an output telling you the version for all three of these command, you
 #### 3.1.2 Cloning QCPU-Ware
 There are two options for cloning the QCPU-Ware Github repository:
 
-**1.** You can download the repo as a .zip file by clicking the "Download" button on the [QCPU-Ware Official Website](https://cogrpar.github.io/cogrpar.QCPUWare.github.io/):
-![Download Button](https://cogrpar.github.io/cogrpar.QCPUWare.github.io/imgs/DownloadScreenshot.png)
+**1.** You can download the repo as a .zip file by clicking the "Download" button on the [QCPU-Ware Official Website](https://cogrpar.github.io/QCPUWare.github.io/):
+![Download Button](./imgs/DownloadScreenshot.png)
 Once the .zip file has finished downloading, extract the contents of the file to a directory that you can easily access.  You can do this through the File Viewer GUI, or by using this command:
 ```
 unzip qcpuWARE-master.zip
@@ -79,7 +79,7 @@ cd qcpuWARE
 ```
 
 #### 3.1.2 Running the QCPU-Ware QCPU Setup Script
-<iframe src="https://cogrpar.github.io/cogrpar.QCPUWare.github.io/imgs/Warning2.html" height="100" width="1000" scrolling='yes' frameBorder="0" align="left" ></iframe>
+<iframe src="./imgs/Warning2.html" height="100" width="1000" scrolling='yes' frameBorder="0" align="left" ></iframe>
 
 Once you have navigated into the repository directory ("qcpuWARE-master" if you downloaded the .zip file, and "qcpuWARE" if you used git), navigate into the "QCPU_Setup" directory by using this command:
 ```
@@ -89,7 +89,7 @@ You can now execute the QCPU setup script using this command:
 ```
 sudo python3 setup.py install
 ```
-If you have already set up a QCPU on a device, and would like to update it, run the above command, but replace the "install" argument with an "update" argument.  If you are prompted for the root password, and you have a root password set up, then enter the root password and hit enter.  If you are prompted for the root password, and you do not have a root password, type in the password of the account that you are currently using and hit enter.  The setup script will start by installing an [Apache Webserver](https://httpd.apache.org) on your device (see [How QCPU-Ware Sets Up QCPUs to Handle Requests from the Java Library](https://cogrpar.github.io/cogrpar.QCPUWare.github.io/docs.html#24-how-qcpu-ware-sets-up-qcpus-to-handle-requests-from-the-java-library)).  If the script prompts you to give it permission to install the webserver, you must give it permission by typing "y" and then enter.  Next, the setup script will prompt you to create a password for the QCPU webserver:  
+If you have already set up a QCPU on a device, and would like to update it, run the above command, but replace the "install" argument with an "update" argument.  If you are prompted for the root password, and you have a root password set up, then enter the root password and hit enter.  If you are prompted for the root password, and you do not have a root password, type in the password of the account that you are currently using and hit enter.  The setup script will start by installing an [Apache Webserver](https://httpd.apache.org) on your device (see [How QCPU-Ware Sets Up QCPUs to Handle Requests from the Java Library](./docs.html#24-how-qcpu-ware-sets-up-qcpus-to-handle-requests-from-the-java-library)).  If the script prompts you to give it permission to install the webserver, you must give it permission by typing "y" and then enter.  Next, the setup script will prompt you to create a password for the QCPU webserver:  
 ```
 What would you like the server's password to be (optional): 
 ```
@@ -166,14 +166,14 @@ QPU timing:
  * readout_time_per_run = 274 us
 setup complete
 ```
-If you get this output, the setup script has completed successfully, and you are ready to start using your QCPU!  Your QCPU should now be set up to start running the QCPU-Ware QCPU solvers whenever it boots up.  For more information on connecting to your QCPU using the Java library, see [Connecting to Your QCPU](https://cogrpar.github.io/cogrpar.QCPUWare.github.io/docs.html#5-connecting-to-your-qcpu).
+If you get this output, the setup script has completed successfully, and you are ready to start using your QCPU!  Your QCPU should now be set up to start running the QCPU-Ware QCPU solvers whenever it boots up.  For more information on connecting to your QCPU using the Java library, see [Connecting to Your QCPU](./docs.html#5-connecting-to-your-qcpu).
 
 ### 3.2 Installing the QCPU-Ware Java Library
 
 In order to install the QCPU-Ware Java library on your primary device, you will need to clone the QCPU-Ware github repo on the primary device.  Once again, here are the two options for cloning the QCPU-Ware Github repository:
 
-**1.** You can download the repo as a .zip file by clicking the "Download" button on the [QCPU-Ware Official Website](https://cogrpar.github.io/cogrpar.QCPUWare.github.io/):
-![Download Button](https://cogrpar.github.io/cogrpar.QCPUWare.github.io/imgs/DownloadScreenshot.png)
+**1.** You can download the repo as a .zip file by clicking the "Download" button on the [QCPU-Ware Official Website](https://cogrpar.github.io/QCPUWare.github.io/):
+![Download Button](./imgs/DownloadScreenshot.png)
 Once the .zip file has finished downloading, extract the contents of the file to a directory that you can easily access.  Once the contents of the .zip file have been extracted, navigate into the new folder called "qcpuWARE-master", either in a file viewer GUI, or by using this command:
 ```
 cd qcpuWARE-master
@@ -210,7 +210,7 @@ If you can run this code without errors, then the QCPU-Ware Java library is set 
 
 
 ## 4. What Types of Problems Can You Solve With QCPU-Ware?
-QCPU-Ware can be used to submit problems to a D-Wave quantum computer to be solved.  D-Wave quantum computers are a special kind of quantum computer called a [**Quantum Annealer**](https://docs.dwavesys.com/docs/latest/c_gs_2.html).  You can learn more about quantum annealing in the D-Wave system documentation, or you can watch [this video](https://www.youtube.com/watch?v=zvfkXjzzYOo) which sums the process up pretty well.  The goal of QCPU-Ware is to make coding on a quantum computer straightforward.  This means that a knowledge of how quantum computers work or how they solve problems is not necessary.  That being said, the process is explained briefly below.  It is not necessary to read that section (although it is helpful if you want), but it is recommended that you read the section after it, [Optimization Problems that Can be Submitted Through QCPU-Ware](https://cogrpar.github.io/cogrpar.QCPUWare.github.io/docs.html#42-optimization-problems-that-can-be-submitted-through-qcpu-ware), as it contains information that will help with the problem defining process.
+QCPU-Ware can be used to submit problems to a D-Wave quantum computer to be solved.  D-Wave quantum computers are a special kind of quantum computer called a [**Quantum Annealer**](https://docs.dwavesys.com/docs/latest/c_gs_2.html).  You can learn more about quantum annealing in the D-Wave system documentation, or you can watch [this video](https://www.youtube.com/watch?v=zvfkXjzzYOo) which sums the process up pretty well.  The goal of QCPU-Ware is to make coding on a quantum computer straightforward.  This means that a knowledge of how quantum computers work or how they solve problems is not necessary.  That being said, the process is explained briefly below.  It is not necessary to read that section (although it is helpful if you want), but it is recommended that you read the section after it, [Optimization Problems that Can be Submitted Through QCPU-Ware](./docs.html#42-optimization-problems-that-can-be-submitted-through-qcpu-ware), as it contains information that will help with the problem defining process.
 
 ### 4.1 How Quantum Annealers Work, and How They Solve Problems
 Quantum annealers, like the ones built by D-Wave (the ones used by QCPU-Ware), are a special kind of quantum computer.  They are simpler than an ordinary [universal quantum computer](https://www.youtube.com/watch?v=2B680d-qvhI&t=24s), and that makes them easier to create in the real world.  Quantum annealers take advantage of a fundamental law of nature: a system will always collapse into the lowest energy state.  Essentially, a quantum annealer encodes a problem onto a set of q-bits and then lets the q-bits collapse into the lowest possible energy state.  In this way, a quantum annealer can find the smallest possible configuration of all of the variables in the problem.  This is useful because it allows quantum annealers to solve problems known as  [**optimization problems**](https://en.wikipedia.org/wiki/Optimization_problem).  Optimization problems are problems that involve many different variables, and the goal is to find the configuration of all of the variables that makes the result as big or as small as possible.  For example, imagine this scenario: a person is going house to house to sell some form of food for a fundraiser.  Every house will buy a different quantity of the food item, and each house will take a certain amount of time to get to.  The person wants to know what houses they should go to, to sell all of the food items as fast as possible, considering both how long it takes to get to each house, and how much each house will purchase.  In this example, solving the optimization problem means finding the configuration of the variables (which houses should be visited) which will minimize the amount of time that it would take to sell all of the food (or if you want to look at it as a maximization problem, the goal would be to maximize efficiency).  Optimization problems show up all of the time in computer science and beyond.  Being able to solve them is extremely useful, but for classical computers, it is extremely difficult.  That is because classical computers must go through every single configuration of the variables to see if it is the best possible configuration.  For problems with many variables, there are essentially an infinite number of possible configurations (at least the number is too great for a classical computer to check in any realistic amount of time), which means that classical computers can't solve most reasonable complex optimization problems.  Quantum annealers, however, are quite efficient at solving optimization problems.  By encoding the problem on a set of q-bits, the annealer can let the q-bits naturally collapse into the lowest energy state, which corresponds to the optimal configuration of all of the variables.  This allows quantum annealers to solve optimization problems much faster than classical computers.
@@ -252,7 +252,7 @@ To get your QCPU's private IP address, open up a terminal on it and type in the 
 hostname -I
 ```
 The output should look something like ```192.168.1.1``` or ```10.0.0.1```.  If you have set up port forwarding and plan on using the public IP, you can use a site such as https://whatismyipaddress.com/ to get it.
-<iframe src="https://cogrpar.github.io/cogrpar.QCPUWare.github.io/imgs/Warning3.html" height="110" width="1000" scrolling='yes' frameBorder="0" align="left" ></iframe>
+<iframe src="./imgs/Warning3.html" height="110" width="1000" scrolling='yes' frameBorder="0" align="left" ></iframe>
 
 #### 5.1.2 Using the SetQcpuIP Method to Set QCPU IP Address in the Java Library
 Once you have found your QCPU's IP address, you will need to use the ```SetQcpuIP``` method within the Java library to specify the address so that the library can submit problems to the QCPU.  Here is a basic rundown of the method and it's parameters:
@@ -262,7 +262,7 @@ qcpuWare.SetQcpuIP(String ip);
 To use the method, simply insert the above line somewhere in your code, where the ```ip``` parameter is the QCPU IP address as a string, eg. ```"192.168.1.1"```.
 
 ### 5.2 QCPU Server Password Using the SetQcpuPw Method
-This step only applies if you set a QCPU server password (see [above](https://cogrpar.github.io/cogrpar.QCPUWare.github.io/docs.html#312-running-the-qcpu-ware-qcpu-setup-script) for details).  If you did not set a server password, then you can skip this section.  A server password must be specified in order for the QCPU-Ware Java library to have access to your QCPU.  This can be done using the ```SetQcpuPw``` method.  Here is a basic rundown of the method and it's parameters:
+This step only applies if you set a QCPU server password (see [above](./docs.html#312-running-the-qcpu-ware-qcpu-setup-script) for details).  If you did not set a server password, then you can skip this section.  A server password must be specified in order for the QCPU-Ware Java library to have access to your QCPU.  This can be done using the ```SetQcpuPw``` method.  Here is a basic rundown of the method and it's parameters:
 ```java
 qcpuWare.SetQcpuPw(String pw);
 ```
@@ -288,7 +288,7 @@ class myClass{
 
 
 ## 6. Solving Binary Constraint Satisfaction Problems
-QCPU-Ware can be used to solve [binary constraint satisfaction problems (BCSPs)](https://cogrpar.github.io/cogrpar.QCPUWare.github.io/docs.html#42-optimization-problems-that-can-be-submitted-through-qcpu-ware).  To formulate the problem, the user must first declare the **problem string**.  In order for the QCPU to be able to interpret the problem specified by the user, the entire problem is encoded in a single string called the problem string.  The process of constructing the problem string is made simple through the tools included in the QCPU-Ware java library.  For BCSPs, the problem string is structured like this:
+QCPU-Ware can be used to solve [binary constraint satisfaction problems (BCSPs)](./docs.html#42-optimization-problems-that-can-be-submitted-through-qcpu-ware).  To formulate the problem, the user must first declare the **problem string**.  In order for the QCPU to be able to interpret the problem specified by the user, the entire problem is encoded in a single string called the problem string.  The process of constructing the problem string is made simple through the tools included in the QCPU-Ware java library.  For BCSPs, the problem string is structured like this:
 ```
 1. QCPU Solver Mode (BCSP in this case)
 2. Constraints 
@@ -458,7 +458,7 @@ This example problem is simple, and we can simply look on the chart for the solu
 
 
 ## 7. Solving For Function Extremes 
-QCPU-Ware can be used to solve for [function extremes](https://cogrpar.github.io/cogrpar.QCPUWare.github.io/docs.html#42-optimization-problems-that-can-be-submitted-through-qcpu-ware).  To formulate the problem, the user must first declare the **problem string**.  In order for the QCPU to be able to interpret the problem specified by the user, the entire problem is encoded in a single string called the problem string.  The process of constructing the problem string is made simple through the tools included in the QCPU-Ware java library.  For function extremes, the problem string is structured like this:
+QCPU-Ware can be used to solve for [function extremes](./docs.html#42-optimization-problems-that-can-be-submitted-through-qcpu-ware).  To formulate the problem, the user must first declare the **problem string**.  In order for the QCPU to be able to interpret the problem specified by the user, the entire problem is encoded in a single string called the problem string.  The process of constructing the problem string is made simple through the tools included in the QCPU-Ware java library.  For function extremes, the problem string is structured like this:
 ```
 1. QCPU Solver Mode (funcExtreme in this case)
 2. Domain of Each Variable (Domains must be between 0 and some positive value)
